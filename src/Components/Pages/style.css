@@ -104,9 +104,14 @@ section {
   font-size: 1.0rem;
   letter-spacing: 0.05rem;
   padding: 0.75rem 1rem;
+  transition: box-shadow .3s;
+  border-radius: 10px;
+  border: 1px solid #000000;
 }
 .button:hover{
-  background: #91610c;
+  border: 1px solid orange;
+  background: #131316;
+  color: orange;
 }
 .reveal {
   position: relative;
