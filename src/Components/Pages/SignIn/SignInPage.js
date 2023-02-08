@@ -2,17 +2,18 @@ import React, {useState, useRef, useEffect} from "react";
 import "../style.css"
 import {useDispatch, useSelector} from "react-redux";
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import {signIn} from "../../../Actions/Auth";
+import {useNavigate} from "react-router-dom";
 
 const SignIn = () => {
-
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const form = useRef();
   const checkBtn = useRef();
-
+  const dispatch = useDispatch();
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -32,7 +33,26 @@ const SignIn = () => {
       );
     }
   };
+
   const handleLogin = (e) => {
+
+    e.preventDefault();
+    form.current.validateAll();
+
+    if (checkBtn.current.context._errors.length === 0) {
+      dispatch(signIn(username, password))
+        .then(() => {
+          navigate("/Homepage");
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
+    }
+
+
+
 
   }
 
