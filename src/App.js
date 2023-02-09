@@ -1,6 +1,7 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import SignIn from "./Components/Pages/SignIn/SignInPage";
 import HomePage from "./Components/Pages/HomePage/HomePage";

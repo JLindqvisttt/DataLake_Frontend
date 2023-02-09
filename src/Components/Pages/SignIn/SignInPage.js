@@ -57,7 +57,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className="container-fluid ps-md-0">
+    <div>
       <div className="bg-image">
         <div className="login d-flex align-items-center py-5">
           <div className="container">
@@ -67,7 +67,6 @@ const SignIn = () => {
 
                 <Form className="text-dark" onSubmit={handleLogin} ref={form}>
                   <div className="form-group mb-3">
-
                     <input
                       type="email"
                       placeholder="name@example.com"
