@@ -1,6 +1,8 @@
 import React, {useState, useRef, useEffect} from "react";
 import "../style.css"
 import Sidebar from "../../Navbar/SidebarMenu";
+import BootstrapTable from 'react-bootstrap-table-next';
+import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
 
 
 const AdminPage = () => {
