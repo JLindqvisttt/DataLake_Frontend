@@ -10,7 +10,7 @@ import {NavLink} from 'react-router-dom';
 import "./Sidebar.css"
 import Cookies from 'js-cookie'
 import {useDispatch} from "react-redux";
-import {signOut} from "../../Actions/Auth";
+import {signOut} from "../../Actions/UserActions/Auth";
 
 
 const Sidebar = (props) => {

@@ -1,12 +1,13 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT,
-} from "../Actions/Auth_Types";
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT, SIGNOUT,
+} from "../Actions/UserActions/Auth_Types";
+import Cookies from "js-cookie";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const user = Cookies.get('user');
 
 const initialState = user
     ? { isLoggedIn: true, user }
@@ -38,7 +39,7 @@ export default function (state = initialState, action) {
                 isLoggedIn: false,
                 user: null,
             };
-        case LOGOUT:
+        case SIGNOUT:
             return {
                 ...state,
                 isLoggedIn: false,

@@ -2,19 +2,54 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom";
 import SignIn from "./Components/Pages/SignIn/SignInPage";
 import HomePage from "./Components/Pages/HomePage/HomePage";
 import Profile from "./Components/Pages/Profile/Profile";
 import AdminPage from "./Components/Pages/Admin/AdminPage";
-function App() {
+import {useDispatch} from "react-redux";
+import AuthVerify from "./Actions/UserActions/Common/AuthVerify";
+import {useCallback, useEffect} from "react";
+import {signOut} from "./Actions/UserActions/Auth";
+import EventBus from "./Actions/UserActions/Common/EventBus";
+
+const App = () => {
+
+  const dispatch = useDispatch();
+  let location = useLocation();
+  useEffect(() => {
+    if (["/"].includes(location.pathname)) {
+
+    }
+  }, [ location]);
+
+
+  const signout = useCallback(() => {
+    dispatch(signOut());
+  }, [dispatch]);
+
+  useEffect(() => {
+    EventBus.on("signOut", () => {
+      signout();
+    });
+
+    return () => {
+      EventBus.remove("signOut");
+    };
+  }, [signout]);
+
   return (
-    <Routes>
-      <Route exact path="/" element=<SignIn/> />
-      <Route exact path="/Homepage" element=<HomePage/> />
-      <Route exact path="/Profile" element=<Profile/> />
-      <Route exact path="/AdminPage" element=<AdminPage/> />
-    </Routes>
+    <div>
+      <Routes>
+        <Route exact path="/" element=<SignIn/> />
+        <Route exact path="/Homepage" element=<HomePage/> />
+        <Route exact path="/Profile" element=<Profile/> />
+        <Route exact path="/AdminPage" element=<AdminPage/> />
+      </Routes>
+      <AuthVerify signout={signout}/>
+    </div>
+
+
   );
 }
 

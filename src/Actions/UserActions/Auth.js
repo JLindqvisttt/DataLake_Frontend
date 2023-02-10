@@ -3,14 +3,13 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  LOGOUT,
+  SIGNOUT,
   SET_MESSAGE,
 } from "./Auth_Types";
 
-import AuthService from "../Services/AuthService"
+import AuthService from "../../Services/AuthService"
 
 export const signIn = (username, password) => (dispatch) => {
-  console.log("KASPER1");
   return AuthService.signIn(username, password).then(
     (data) => {
       dispatch({
@@ -45,6 +44,6 @@ export const signIn = (username, password) => (dispatch) => {
 export const signOut = () => (dispatch) => {
   AuthService.signOut();
   dispatch({
-    type: LOGOUT
+    type: SIGNOUT
   })
 }
