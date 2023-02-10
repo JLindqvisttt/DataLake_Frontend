@@ -2,6 +2,8 @@ import React, {useState, useRef, useEffect} from "react";
 import "../style.css"
 import Sidebar from "../../Navbar/SidebarMenu";
 import Cookies from "js-cookie";
+import {useSelector} from "react-redux";
+import {Navigate} from "react-router-dom";
 
 
 const Profile = () => {
@@ -10,12 +12,20 @@ const Profile = () => {
   const [userFirstname,setuserFirstname] = useState();
   const [userLastname,setuserLastname] = useState();
 
+  const { user: currentUser } = useSelector((state) => state.auth);
   useEffect(() => {
-    setUserEmail(JSON.parse(Cookies.get('user')).email)
-    setuserFirstname(JSON.parse(Cookies.get('user')).firstname)
-    setuserLastname(JSON.parse(Cookies.get('user')).lastname)
-    setUserRole(JSON.parse(Cookies.get('user')).role)
+    if(Cookies.get('user')){
+      setUserEmail(JSON.parse(Cookies.get('user')).email)
+      setuserFirstname(JSON.parse(Cookies.get('user')).firstname)
+      setuserLastname(JSON.parse(Cookies.get('user')).lastname)
+      setUserRole(JSON.parse(Cookies.get('user')).role)
+    }
   }, [])
+
+  if (!Cookies.get('user')) {
+    return <Navigate to="/" />;
+  }
+
 
   return (
     <div className="container-fluid ps-md-0">
