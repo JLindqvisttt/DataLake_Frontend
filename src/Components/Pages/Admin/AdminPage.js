@@ -5,9 +5,9 @@ import Sidebar from "../../Navbar/SidebarMenu";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
-import EditableTable from "./Table";
 import {Navigate} from "react-router-dom";
 import Cookies from "js-cookie";
+import AdminTable from "./AdminTable";
 
 
 const AdminPage = () => {
@@ -27,8 +27,8 @@ const AdminPage = () => {
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="col-6 m-5">
-            <h1>Admin page </h1>
-            <EditableTable/>
+            <h1 className="text-white mb-5 animatedLine">Admin page</h1>
+            <AdminTable/>
 
           </div>
         </div>

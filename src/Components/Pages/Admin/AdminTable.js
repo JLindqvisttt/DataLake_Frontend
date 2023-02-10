@@ -5,7 +5,7 @@ import {signOut} from "../../../Actions/UserActions/Auth";
 import axios from "axios";
 import ModalEdit from "./ModalEdit";
 
-const EditableTable = () => {
+const AdminTable = () => {
   const columns = ['Fullname', 'Age', 'Company Name', 'City', 'Country'];
 
   const [userList, setUserList] = useState([]);
@@ -21,8 +21,8 @@ const EditableTable = () => {
 
 
   return (
-    <Table bordered hover variant="dark">
-      <thead className="bg-dark text-white">
+    <table className="table text-white">
+      <thead className="animatedLine" >
       <tr>
         <th>ID</th>
         <th>Email</th>
@@ -48,7 +48,7 @@ const EditableTable = () => {
         )
       }
       </tbody>
-    </Table>
+    </table>
   );
 };
-export default EditableTable;
+export default AdminTable;

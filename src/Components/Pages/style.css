@@ -12,7 +12,9 @@
   box-shadow: 0 0 11px rgba(33, 33, 33, 1);
 }
 
-
+body{
+  background: #131316;
+}
 .login {
   min-height: 100vh;
   margin-right: 0;
@@ -95,6 +97,29 @@ section {
   background-clip: text;
   text-align: center;
   -webkit-text-fill-color: transparent;
+}
+.buttonGreen{
+  background: #245e33;
+  color:antiquewhite;
+  border-radius: 1vh;
+  padding: 1vh;
+  font-size: 1.0rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+  transition: box-shadow .3s;
+  border-radius: 10px;
+  border: 1px solid #000000;
+}
+.buttonGreen:hover{
+  border: 1px solid #245e33;
+  background: #131316;
+  color: #245e33;
+}
+Table{
+  padding: 20vh;
+}
+.textOrange{
+ color: #f16606;
 }
 .button{
   background: orange;

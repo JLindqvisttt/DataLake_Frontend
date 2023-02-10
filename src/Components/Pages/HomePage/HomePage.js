@@ -14,13 +14,12 @@ const HomePage = () => {
   }
 
   return (
-    <div className="container-fluid ps-md-0">
-
+    <div>
       <Sidebar/>
       <div className="container">
         <div className="row justify-content-md-center">
-          <div className="col-6 m-5">
-            <h1>Home page</h1>
+          <div className="col-8 m-5">
+            <h1 className="text-white mb-5 animatedLine">Home page</h1>
           </div>
         </div>
       </div>

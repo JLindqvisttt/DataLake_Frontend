@@ -29,7 +29,7 @@ const Sidebar = (props) => {
 
   return (
     <div style={{position: 'fixed', overflow: 'scroll initial', height: '100vh', zIndex: '1000'}}>
-      <CDBSidebar style={{backgroundColor: "#131316"}}>
+      <CDBSidebar style={{backgroundColor: "#131316", boxShadow: '2px 2px 10px 1px rgb(255, 165, 0,0.2)'}}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large text-dark"></i>} className="animatedLine">
           <a href="/Homepage" className="text-decoration-none sidebarTitle" style={{color: 'inherit'}}>
             Data lake
