@@ -14,6 +14,9 @@ const SignIn = () => {
   const form = useRef();
   const checkBtn = useRef();
   const dispatch = useDispatch();
+
+  const {message} = useSelector(state => state.message);
+
   const onChangeUsername = (e) => {
     const username = e.target.value;
     setUsername(username);
@@ -37,6 +40,7 @@ const SignIn = () => {
   const handleLogin = (e) => {
 
     e.preventDefault();
+    setLoading(true);
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
@@ -50,10 +54,6 @@ const SignIn = () => {
     } else {
       setLoading(false);
     }
-
-
-
-
   }
 
   return (
@@ -92,6 +92,13 @@ const SignIn = () => {
                     />
                   </div>
 
+                  {message && (
+                    <div className="form-group-sm">
+                      <div className="alert alert-danger" role="alert">
+                        {message}
+                      </div>
+                    </div>
+                  )}
                   <CheckButton style={{display: "none"}} ref={checkBtn}/>
                   <div className="row">
                     <div className="col">
@@ -99,7 +106,7 @@ const SignIn = () => {
                         <button className="button fw-bold mb-2"
                                 disabled={loading}>
                           {loading && (
-                            <span className="spinner-border spinner-border-sm "></span>
+                            <span className="spinner-border spinner-border-sm ">  </span>
                           )}
                           <span>Sign in</span>
                         </button>
