@@ -26,7 +26,7 @@ const AdminPage = () => {
       <Sidebar/>
       <div className="container">
         <div className="row justify-content-md-center">
-          <div className="col m-5">
+          <div className="col-lg-7 m-5">
             <h1 className="text-white mb-5 animatedLine">Admin page</h1>
             <AdminTable/>
           </div>

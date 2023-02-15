@@ -32,17 +32,18 @@ const AdminTable = (props) => {
       </thead>
       <tbody>
       {
-        userList.map((user) =>
-          <tr key={user.identity}>
-            <td>{user.identity}</td>
-            <td>{user.username}</td>
-            <td>{user.firstName}</td>
-            <td>{user.lastName}</td>
-            <td>{user.role}</td>
-            <td><ModalEdit user={user}/></td>
-          </tr>
-
-
+        userList.map((user) =>{
+          if(JSON.parse(Cookies.get('user')).email !== user.username){
+             return <tr key={user.identity}>
+              <td>{user.identity}</td>
+              <td>{user.username}</td>
+              <td>{user.firstName}</td>
+              <td>{user.lastName}</td>
+              <td>{user.role}</td>
+              <td><ModalEdit user={user}/></td>
+            </tr>
+          }
+        }
         )
       }
       </tbody>
