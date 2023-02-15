@@ -1,5 +1,5 @@
-import {STATES} from "../Actions/UserActions/Auth";
 
+import {STATES} from "../Actions/UserActions/AuthAction";
 const initialState = {};
 
 export default function (state = initialState, action) {

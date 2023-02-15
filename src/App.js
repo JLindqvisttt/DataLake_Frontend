@@ -10,7 +10,7 @@ import AdminPage from "./Components/Pages/Admin/AdminPage";
 import {useDispatch} from "react-redux";
 import AuthVerify from "./Actions/UserActions/Common/AuthVerify";
 import {useCallback, useEffect} from "react";
-import {signOut} from "./Actions/UserActions/Auth";
+import {signOut} from "./Actions/UserActions/AuthAction";
 import EventBus from "./Actions/UserActions/Common/EventBus";
 
 const App = () => {

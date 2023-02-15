@@ -1,5 +1,5 @@
 import UserService from "../../Services/UserService";
-import {STATES} from "./Auth";
+import {STATES} from "./AuthAction";
 
 export const USERSTATE = {
   EDIT_USER: "EDIT_USER",
@@ -12,6 +12,7 @@ export const getAllUsers = () => (dispatch) => {
   return UserService.getAllUsers().then(
     (data) => {
       const jsonResp = JSON.stringify(data.data)
+
       dispatch({
         type: USERSTATE.GET_ALL_USER,
         payload: {users:jsonResp}
