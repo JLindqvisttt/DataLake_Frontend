@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import {signIn} from "../../../Actions/UserActions/Auth";
+import {signIn} from "../../../Actions/UserActions/AuthAction";
 
 
 const Profile = () => {
