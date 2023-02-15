@@ -1,15 +1,15 @@
 import {
-  EDIT_USER, EDIT_USER_FAIL, GET_ALL_USER, GET_ALL_USER_FAIL
+  USERSTATE
 } from "./UserTypes";
 
 import UserService from "../../Services/UserService";
-import {LOGIN_FAIL, SET_MESSAGE} from "./Auth_Types";
+import {STATES} from "./Auth_Types";
 
 export const getAllUsers = () => (dispatch) => {
   return UserService.getAllUsers().then(
     (data) => {
       dispatch({
-        type: GET_ALL_USER,
+        type: USERSTATE.GET_ALL_USER,
         payload: {user:data}
       });
       return Promise.resolve();
@@ -23,11 +23,11 @@ export const getAllUsers = () => (dispatch) => {
         error.toString();
 
       dispatch({
-        type: GET_ALL_USER_FAIL,
+        type: USERSTATE.GET_ALL_USER_FAIL,
       });
 
       dispatch({
-        type: SET_MESSAGE,
+        type: STATES.SET_MESSAGE,
         payload: message,
       });
 
