@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 
 const HomePage = () => {
 
-
   if (!Cookies.get('user')) {
     return <Navigate to="/"/>;
   }

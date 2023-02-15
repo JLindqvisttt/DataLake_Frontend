@@ -4,18 +4,19 @@ import Cookies from "js-cookie";
 import {signOut} from "../../../Actions/UserActions/Auth";
 import axios from "axios";
 import ModalEdit from "./ModalEdit";
+import {useDispatch} from "react-redux";
+import {getAllUsers} from "../../../Actions/UserActions/UserAction";
 
 const AdminTable = () => {
-  const columns = ['Fullname', 'Age', 'Company Name', 'City', 'Country'];
 
   const [userList, setUserList] = useState([]);
-
+  const dispatch = useDispatch();
   useEffect(() => {
 
-    axios.get("http://localhost:8085/api/auth/getAllUser")
-      .then((respone) =>{
-        console.log(respone.data)
-        setUserList(respone.data);
+    dispatch(getAllUsers())
+      .then((response) =>{
+
+        setUserList(response.data);
       })
   }, [])
 
@@ -48,7 +49,9 @@ const AdminTable = () => {
         )
       }
       </tbody>
+      <h2>APA {userList}</h2>
     </table>
+
   );
 };
 export default AdminTable;
