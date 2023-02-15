@@ -16,7 +16,7 @@ const AdminPage = () => {
   if (!Cookies.get('user')) {
     return <Navigate to="/"/>;
   }
-  if (JSON.parse(Cookies.get('user')).role == "ROLE_USER") {
+  if (JSON.parse(Cookies.get('user')).role === "ROLE_USER") {
     return <Navigate to="/Homepage"/>;
   }
 

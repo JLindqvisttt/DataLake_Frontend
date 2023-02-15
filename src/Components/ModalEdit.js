@@ -62,6 +62,7 @@ const AdminPage = (props) => {
       availableDatabases: props.user.availableDatabases
     }
     dispatch(updateUser(theEditUser)).then((response) => {
+      console.log(response)
       setResponseMsg(response)
     })
       .catch((err) => {
@@ -71,7 +72,8 @@ const AdminPage = (props) => {
   }
 
   function getMessage() {
-    if (responseMsg.status == 200)
+    console.log("apa" + responseMsg.status)
+    if (responseMsg.status === 200)
       return <div className="form-group-sm mt-2">
         <div className="alert alert-success" role="alert">
           {responseMsg.data}
@@ -118,7 +120,7 @@ const AdminPage = (props) => {
             <option value="ROLE_USER">ROLE_USER</option>
           </select>
 
-          <div className="form-check form-check-inline mt-3" onChange={event => setshowPassword(showPassword=>!showPassword) }>
+          <div className="form-check form-check-inline mt-3" onChange={event =>{ setshowPassword(showPassword=>!showPassword) }}>
             <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"  />
             <h6>Check this if you want to create a new password</h6>
           </div>
@@ -133,8 +135,8 @@ const AdminPage = (props) => {
               onChange={onChangePassword}
               required
             />
-            {getMessage()}
           </div>
+          {getMessage()}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" className="btn btn-danger" onClick={handleClose}>
