@@ -51,7 +51,7 @@ export const updateUser = (editUser) => (dispatch) => {
         type: USERSTATE.UPDATE_USER,
         payload: {users: data}
       });
-      return Promise.resolve();
+      return data.data.message;
     },
     (error) => {
       const message =

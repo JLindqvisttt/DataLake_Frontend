@@ -4,15 +4,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
-import {Modal, NavLink} from "react-bootstrap";
-import {Button, Col} from "reactstrap";
+import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../Redux/Actions/UserActions/UserAction";
 
 
 const AdminPage = (props) => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const [successMsg, setSuccessMsg] = useState("");
+
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
@@ -41,6 +41,12 @@ const AdminPage = (props) => {
       );
     }
   };
+
+    const handleClose = () => {
+        setSuccessMsg("")
+        setShow(false);
+    }
+
   const handleSubmit = (e) => {
     //Kalla på axios funktionen
 
@@ -54,7 +60,8 @@ const AdminPage = (props) => {
       availableDatabases: props.user.availableDatabases
     }
     dispatch(updateUser(theEditUser)).then((response) => {
-      console.log("JONTEÄRBÄST")
+        const json = JSON.stringify(response)
+        setSuccessMsg(json)
     })
       .catch(() => {
         console.log("ERROR")
@@ -111,7 +118,7 @@ const AdminPage = (props) => {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <h5>Visa meddelande om det lyckas eller inte</h5>
+          <h5>{successMsg}</h5>
           <Button variant="primary" className="btn btn-danger" onClick={handleClose}>
             Close
           </Button>
