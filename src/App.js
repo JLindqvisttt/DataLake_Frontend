@@ -15,42 +15,42 @@ import EventBus from "./Redux/Actions/UserActions/EventBus";
 
 const App = () => {
 
-  const dispatch = useDispatch();
-  let location = useLocation();
-  useEffect(() => {
-    if (["/"].includes(location.pathname)) {
+    const dispatch = useDispatch();
+    let location = useLocation();
+    useEffect(() => {
+        if (["/"].includes(location.pathname)) {
 
-    }
-  }, [ location]);
-
-
-  const signout = useCallback(() => {
-    dispatch(signOut());
-  }, [dispatch]);
-
-  useEffect(() => {
-    EventBus.on("signOut", () => {
-      signout();
-    });
-
-    return () => {
-      EventBus.remove("signOut");
-    };
-  }, [signout]);
-
-  return (
-    <div>
-      <Routes>
-        <Route exact path="/" element=<SignIn/> />
-        <Route exact path="/Homepage" element=<HomePage/> />
-        <Route exact path="/Profile" element=<Profile/> />
-        <Route exact path="/AdminPage" element=<AdminPage/> />
-      </Routes>
-      <AuthVerify signout={signout}/>
-    </div>
+        }
+    }, [location]);
 
 
-  );
+    const signout = useCallback(() => {
+        dispatch(signOut());
+    }, [dispatch]);
+
+    useEffect(() => {
+        EventBus.on("signOut", () => {
+            signout();
+        });
+
+        return () => {
+            EventBus.remove("signOut");
+        };
+    }, [signout]);
+
+    return (
+        <div>
+            <Routes>
+                <Route exact path="/" element=<SignIn/> />
+                <Route exact path="/Homepage" element=<HomePage/> />
+                <Route exact path="/Profile" element=<Profile/> />
+                <Route exact path="/AdminPage" element=<AdminPage/> />
+            </Routes>
+            <AuthVerify signout={signout}/>
+        </div>
+
+
+    );
 }
 
 export default App;

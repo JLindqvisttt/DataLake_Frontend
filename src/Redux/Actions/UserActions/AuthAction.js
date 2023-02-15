@@ -1,4 +1,5 @@
 import AuthService from "../../Services/AuthService"
+
 export const STATES = {
     REGISTER_SUCCESS: "REGISTER_SUCCESS",
     REGISTER_FAIL: "REGISTER_FAIL",

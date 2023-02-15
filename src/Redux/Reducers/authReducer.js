@@ -1,4 +1,3 @@
-
 import {STATES} from "../Actions/UserActions/AuthAction";
 import Cookies from "js-cookie";
 
