@@ -1,9 +1,12 @@
-import {
-  USERSTATE
-} from "./UserTypes";
-
 import UserService from "../../Services/UserService";
-import {STATES} from "./Auth_Types";
+import {STATES} from "./Auth";
+
+export const USERSTATE = {
+  EDIT_USER: "EDIT_USER",
+  EDIT_USER_FAIL: "EDIT_USER_FAIL",
+  GET_ALL_USER: "GET_ALL_USER",
+  GET_ALL_USER_FAIL: "GET_ALL_USER_FAIL",
+};
 
 export const getAllUsers = () => (dispatch) => {
   return UserService.getAllUsers().then(
