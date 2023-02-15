@@ -1,6 +1,5 @@
 import axios from "axios";
 import Cookies from 'js-cookie'
-import {useDispatch} from "react-redux";
 
 const API_URL = "http://localhost:8085/api/auth/"
 
