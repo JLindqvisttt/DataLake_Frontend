@@ -39,7 +39,7 @@ const Sidebar = (props) => {
         <CDBSidebarContent className="sidebar-content">
 
           <CDBSidebarMenu>
-            <NavLink exact to="/Homepage" activeClassName="activeClicked">
+            <NavLink  to="/Homepage" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="home animatedLine">Home</CDBSidebarMenuItem>
             </NavLink>
 
@@ -47,13 +47,13 @@ const Sidebar = (props) => {
               <CDBSidebarMenuItem icon="user animatedLine">{userEmail}</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/" activeClassName="activeClicked" onClick={ signout  }>
+            <NavLink  to="/" activeclassname="activeClicked" onClick={ signout  }>
               <CDBSidebarMenuItem icon="sign-out-alt text-danger">Sign out</CDBSidebarMenuItem>
             </NavLink>
             <div>
               <div hidden={userRole !== "ROLE_ADMIN"}>
                 <hr/>
-                <NavLink exact to="/Adminpage" activeClassName="activeClicked ">
+                <NavLink  to="/Adminpage" activeclassname="activeClicked ">
                   <CDBSidebarMenuItem icon="lock-open text-info">Admin page </CDBSidebarMenuItem>
                 </NavLink>
               </div>

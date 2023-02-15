@@ -21,12 +21,12 @@ const AdminPage = () => {
   }
 
   return (
-    <div className="container-fluid ps-md-0">
+    <div>
 
       <Sidebar/>
       <div className="container">
         <div className="row justify-content-md-center">
-          <div className="col-6 m-5">
+          <div className="col m-5">
             <h1 className="text-white mb-5 animatedLine">Admin page</h1>
             <AdminTable/>
           </div>

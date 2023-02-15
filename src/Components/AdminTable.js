@@ -24,7 +24,6 @@ const AdminTable = (props) => {
       <tr>
         <th>ID</th>
         <th>Email</th>
-        <th>Password</th>
         <th>Firstname</th>
         <th>Lastname</th>
         <th>Role</th>
@@ -33,10 +32,9 @@ const AdminTable = (props) => {
       </thead>
       <tbody>
       {
-        userList.map((user,index) =>
-          <tr>
+        userList.map((user) =>
+          <tr key={user.identity}>
             <td>{user.identity}</td>
-            <td>{user.username}</td>
             <td>{user.username}</td>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
