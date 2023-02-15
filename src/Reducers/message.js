@@ -1,4 +1,4 @@
-import {STATES} from "../Actions/UserActions/Auth_Types";
+import {STATES} from "../Actions/UserActions/Auth";
 
 const initialState = {};
 

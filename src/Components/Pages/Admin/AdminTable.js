@@ -7,16 +7,16 @@ import ModalEdit from "./ModalEdit";
 import {useDispatch} from "react-redux";
 import {getAllUsers} from "../../../Actions/UserActions/UserAction";
 
-const AdminTable = () => {
+const AdminTable = (props) => {
 
   const [userList, setUserList] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
 
     dispatch(getAllUsers())
-      .then((response) =>{
-
-        setUserList(response.data);
+      .then((users) =>{
+        console.log(users)
+        setUserList(users);
       })
   }, [])
 
@@ -36,8 +36,8 @@ const AdminTable = () => {
       </thead>
       <tbody>
       {
-        userList.map(user =>
-          <tr>
+        userList.map((user,index) =>{
+          <tr >
             <td>{user.identity}</td>
             <td>{user.username}</td>
             <td>{user.username}</td>
@@ -46,6 +46,8 @@ const AdminTable = () => {
             <td>{user.role}</td>
             <td><ModalEdit user={user}/></td>
           </tr>
+        }
+
         )
       }
       </tbody>

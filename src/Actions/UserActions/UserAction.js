@@ -11,11 +11,12 @@ export const USERSTATE = {
 export const getAllUsers = () => (dispatch) => {
   return UserService.getAllUsers().then(
     (data) => {
+      const jsonResp = JSON.stringify(data.data)
       dispatch({
         type: USERSTATE.GET_ALL_USER,
-        payload: {user:data}
+        payload: {users:jsonResp}
       });
-      return Promise.resolve();
+      return jsonResp;
     },
     (error) => {
       const message =
