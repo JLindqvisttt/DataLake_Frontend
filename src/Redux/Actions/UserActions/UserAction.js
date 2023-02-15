@@ -46,12 +46,11 @@ export const getAllUsers = () => (dispatch) => {
 export const updateUser = (editUser) => (dispatch) => {
   return UserService.updateUser(editUser).then(
     (data) => {
-
       dispatch({
         type: USERSTATE.UPDATE_USER,
         payload: {users: data}
       });
-      return data.data.message;
+      return data;
     },
     (error) => {
       console.log(error)
@@ -71,7 +70,7 @@ export const updateUser = (editUser) => (dispatch) => {
         payload: message,
       });
 
-      return error.response.data;
+      return error.response;
     }
   );
 }
