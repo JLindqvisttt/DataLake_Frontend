@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
-import "../style.css"
-import Sidebar from "../../Navbar/SidebarMenu";
+import "../Styles/style.css"
+import Sidebar from "../Components/SidebarMenu";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import Cookies from "js-cookie";

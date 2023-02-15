@@ -7,10 +7,10 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import {NavLink} from 'react-router-dom';
-import "./Sidebar.css"
+import "../Styles/Sidebar.css"
 import Cookies from 'js-cookie'
 import {useDispatch} from "react-redux";
-import {signOut} from "../../Redux/Actions/UserActions/AuthAction";
+import {signOut} from "../Redux/Actions/UserActions/AuthAction";
 
 
 const Sidebar = (props) => {
@@ -31,7 +31,7 @@ const Sidebar = (props) => {
     <div style={{position: 'fixed', overflow: 'scroll initial', height: '100vh', zIndex: '1000'}}>
       <CDBSidebar style={{backgroundColor: "#131316", boxShadow: '2px 2px 10px 1px rgb(255, 165, 0,0.2)'}}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large text-dark"></i>} className="animatedLine">
-          <a href="/Homepage" className="text-decoration-none sidebarTitle" style={{color: 'inherit'}}>
+          <a href="/Users/Nonno/Documents/GitHub/DataLake_Frontend/src/Pages/HomePage" className="text-decoration-none sidebarTitle" style={{color: 'inherit'}}>
             Data lake
           </a>
         </CDBSidebarHeader>
@@ -43,7 +43,7 @@ const Sidebar = (props) => {
               <CDBSidebarMenuItem icon="home animatedLine">Home</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/Profile" activeClassName="activeClicked">
+            <NavLink exact to="/ProfilePage" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user animatedLine">{userEmail}</CDBSidebarMenuItem>
             </NavLink>
 

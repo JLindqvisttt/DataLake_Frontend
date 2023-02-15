@@ -1,4 +1,4 @@
-import UserService from "../../Services/UserService";
+import UserService from "../../../Services/UserService";
 import {STATES} from "./AuthAction";
 
 export const USERSTATE = {

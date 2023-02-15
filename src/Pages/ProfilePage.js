@@ -1,15 +1,15 @@
 import React, {useState, useRef, useEffect} from "react";
-import "../style.css"
-import Sidebar from "../../Navbar/SidebarMenu";
+import "../Styles/style.css"
+import Sidebar from "../Components/SidebarMenu";
 import Cookies from "js-cookie";
 import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import {signIn} from "../../../Redux/Actions/UserActions/AuthAction";
+import {signIn} from "../Redux/Actions/UserActions/AuthAction";
 
 
-const Profile = () => {
+const ProfilePage = () => {
   const [userEmail, setUserEmail] = useState();
   const [userRole, setUserRole] = useState();
   const [userFirstname, setuserFirstname] = useState();
@@ -108,4 +108,4 @@ const Profile = () => {
 };
 
 
-export default Profile;
+export default ProfilePage;

@@ -1,4 +1,4 @@
-import AuthService from "../../Services/AuthService"
+import AuthService from "../../../Services/AuthService"
 
 export const STATES = {
     REGISTER_SUCCESS: "REGISTER_SUCCESS",

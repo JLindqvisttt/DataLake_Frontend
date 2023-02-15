@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
-import "../style.css"
+import "../Styles/style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";

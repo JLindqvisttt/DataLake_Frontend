@@ -1,12 +1,12 @@
-import './App.css';
+import './Styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
-import paginationFactory from 'react-bootstrap-table2-paginator';
+
 import {BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom";
-import SignIn from "./Components/Pages/SignIn/SignInPage";
-import HomePage from "./Components/Pages/HomePage/HomePage";
-import Profile from "./Components/Pages/Profile/Profile";
-import AdminPage from "./Components/Pages/Admin/AdminPage";
+import SignIn from "./Pages/SignInPage";
+import HomePage from "./Pages/HomePage";
+import ProfilePage from "./Pages/ProfilePage";
+import AdminPage from "./Pages/AdminPage";
 import {useDispatch} from "react-redux";
 import AuthVerify from "./Redux/Actions/UserActions/AuthVerify";
 import {useCallback, useEffect} from "react";
@@ -43,7 +43,7 @@ const App = () => {
             <Routes>
                 <Route exact path="/" element=<SignIn/> />
                 <Route exact path="/Homepage" element=<HomePage/> />
-                <Route exact path="/Profile" element=<Profile/> />
+                <Route exact path="/ProfilePage" element=<ProfilePage/> />
                 <Route exact path="/AdminPage" element=<AdminPage/> />
             </Routes>
             <AuthVerify signout={signout}/>

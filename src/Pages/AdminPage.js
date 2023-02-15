@@ -1,13 +1,13 @@
 import React, {useState, useRef, useEffect} from "react";
-import "../style.css"
+import "../Styles/style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Sidebar from "../../Navbar/SidebarMenu";
+import Sidebar from "../Components/SidebarMenu";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Navigate} from "react-router-dom";
 import Cookies from "js-cookie";
-import AdminTable from "./AdminTable";
+import AdminTable from "../Components/AdminTable";
 
 
 const AdminPage = () => {
@@ -29,11 +29,9 @@ const AdminPage = () => {
           <div className="col-6 m-5">
             <h1 className="text-white mb-5 animatedLine">Admin page</h1>
             <AdminTable/>
-
           </div>
         </div>
       </div>
-
     </div>
   );
 };
