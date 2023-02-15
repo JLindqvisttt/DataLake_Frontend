@@ -1,16 +1,16 @@
-import { SET_MESSAGE, CLEAR_MESSAGE } from "../Actions/UserActions/Auth_Types";
+import {STATES} from "../Actions/UserActions/Auth_Types";
 
 const initialState = {};
 
 export default function (state = initialState, action) {
-    const { type, payload } = action;
+    const {type, payload} = action;
 
     switch (type) {
-        case SET_MESSAGE:
-            return { message: payload };
+        case STATES.SET_MESSAGE:
+            return {message: payload};
 
-        case CLEAR_MESSAGE:
-            return { message: "" };
+        case STATES.CLEAR_MESSAGE:
+            return {message: ""};
 
         default:
             return state;
