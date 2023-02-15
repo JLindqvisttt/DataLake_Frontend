@@ -12,11 +12,9 @@ const AdminTable = (props) => {
   const [userList, setUserList] = useState([]);
   const dispatch = useDispatch();
   useEffect(() => {
-
     dispatch(getAllUsers())
       .then((users) =>{
-        console.log(users)
-        setUserList(users);
+        setUserList(JSON.parse(users))
       })
   }, [])
 
@@ -36,8 +34,8 @@ const AdminTable = (props) => {
       </thead>
       <tbody>
       {
-        userList.map((user,index) =>{
-          <tr >
+        userList.map((user,index) =>
+          <tr>
             <td>{user.identity}</td>
             <td>{user.username}</td>
             <td>{user.username}</td>
@@ -46,12 +44,11 @@ const AdminTable = (props) => {
             <td>{user.role}</td>
             <td><ModalEdit user={user}/></td>
           </tr>
-        }
+
 
         )
       }
       </tbody>
-      <h2>APA {userList}</h2>
     </table>
 
   );
