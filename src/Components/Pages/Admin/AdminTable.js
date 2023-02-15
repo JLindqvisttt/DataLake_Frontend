@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {Button, Table} from "reactstrap";
 import Cookies from "js-cookie";
-import {signOut} from "../../../Actions/UserActions/AuthAction";
+import {signOut} from "../../../Redux/Actions/UserActions/AuthAction";
 import axios from "axios";
 import ModalEdit from "./ModalEdit";
 import {useDispatch} from "react-redux";
-import {getAllUsers} from "../../../Actions/UserActions/UserAction";
+import {getAllUsers} from "../../../Redux/Actions/UserActions/UserAction";
 
 const AdminTable = (props) => {
 

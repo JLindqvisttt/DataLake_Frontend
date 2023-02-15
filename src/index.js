@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import {Provider} from "react-redux";
 import {BrowserRouter} from "react-router-dom";
-import store from "./store";
+import store from "./Redux/store";
 import * as serviceWorker from "./serviceWorker";
 
 const container = document.getElementById('root');
