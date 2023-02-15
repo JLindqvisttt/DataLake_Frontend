@@ -12,12 +12,13 @@ import {updateUser} from "../Redux/Actions/UserActions/UserAction";
 const AdminPage = (props) => {
   const [show, setShow] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
-
   const handleShow = () => setShow(true);
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(props.user.role);
   const checkBtn = useRef();
+
+
   const onChangePassword = (e) => {
     const password = e.target.value;
     setPassword(password);
@@ -51,7 +52,7 @@ const AdminPage = (props) => {
     //Kalla på axios funktionen
 
     const theEditUser = {
-      identity: props.user.identity,
+      identity: 233,
       username: props.user.username,
       password: password,
       firstname: props.user.firstName,
@@ -63,8 +64,9 @@ const AdminPage = (props) => {
         const json = JSON.stringify(response)
         setSuccessMsg(json)
     })
-      .catch(() => {
-        console.log("ERROR")
+      .catch((err) => {
+
+        console.log("ERROR" + err.body)
       })
 
   }

@@ -54,6 +54,7 @@ export const updateUser = (editUser) => (dispatch) => {
       return data.data.message;
     },
     (error) => {
+      console.log(error)
       const message =
         (error.response &&
           error.response.data &&
@@ -70,7 +71,7 @@ export const updateUser = (editUser) => (dispatch) => {
         payload: message,
       });
 
-      return Promise.reject();
+      return error.response.data;
     }
   );
 }
