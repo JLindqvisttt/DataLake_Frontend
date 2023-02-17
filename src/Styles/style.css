@@ -119,10 +119,10 @@ Table{
   padding: 20vh;
 }
 .textOrange{
- color: #f16606;
+ color: #f17b2a;
 }
 .button{
-  background: orange;
+  background: #f17b2a;
   color:antiquewhite;
   border-radius: 1vh;
   padding: 1vh;
@@ -134,9 +134,9 @@ Table{
   border: 1px solid #000000;
 }
 .button:hover{
-  border: 1px solid orange;
+  border: 1px solid #f17b2a;
   background: #131316;
-  color: orange;
+  color: #f17b2a;
 }
 .reveal {
   position: relative;

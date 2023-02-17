@@ -2,11 +2,13 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Cookies from "js-cookie";
 import {signOut} from "../Redux/Actions/UserActions/AuthAction";
 import axios from "axios";
-import ModalEdit from "./ModalEdit";
+import ModalEditUser from "./ModalEditUser";
 import {useDispatch} from "react-redux";
 import {getAllUsers} from "../Redux/Actions/UserActions/UserAction";
 import {IconName} from "react-icons/io5";
 import {MDBIcon} from "mdb-react-ui-kit";
+import ModalRemoveUser from "./ModalRemoveUser";
+import ModalAddUser from "./ModalAddUser";
 
 const AdminTable = (props) => {
 
@@ -32,19 +34,27 @@ const AdminTable = (props) => {
   return (
     <>
       <div className="row">
+        <div className="col">
+
+        </div>
 
       </div>
       <div className="row">
-
         <table className="table text-white">
-          <thead >
+          <thead>
           <tr>
             <th className="animatedLine">Email</th>
             <th className="animatedLine">Firstname</th>
             <th className="animatedLine">Lastname</th>
             <th className="animatedLine">Role</th>
             <th className="animatedLine">Edit</th>
-            <th><button className="btn btn-primary text-white" onClick={event => updateTheUserList()}><MDBIcon fas icon="sync"/> </button> </th>
+            <th>
+              <button className="button fw-bold" onClick={event => updateTheUserList()}><MDBIcon fas icon="sync"/>
+              </button>
+            </th>
+            <th>
+              <ModalAddUser/>
+            </th>
           </tr>
           </thead>
           <tbody>
@@ -56,8 +66,9 @@ const AdminTable = (props) => {
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.role}</td>
-                    <td><ModalEdit user={user}/></td>
-                    <td><button className="btn btn-danger text-white"><MDBIcon fas icon="trash-alt" /> </button></td>
+                    <td><ModalEditUser user={user}/></td>
+                    <td></td>
+                    <td><ModalRemoveUser user={user}/></td>
                   </tr>
                 }
               }

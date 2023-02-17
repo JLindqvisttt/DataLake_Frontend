@@ -7,9 +7,10 @@ import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {updateUser} from "../Redux/Actions/UserActions/UserAction";
+import {MDBIcon} from "mdb-react-ui-kit";
 
 
-const ModalEdit = (user) => {
+const ModalEditUser = (user) => {
 
   const [show, setShow] = useState(false);
   const [responseMsg, setResponseMsg] = useState("");
@@ -106,7 +107,7 @@ const ModalEdit = (user) => {
   return (
     <>
       <button className="btn btn-primary" onClick={handleShow}>
-        Edit
+        <MDBIcon fas icon="user-edit" />
       </button>
 
       <Modal
@@ -117,9 +118,10 @@ const ModalEdit = (user) => {
         centered
       >
         <Modal.Header closeButton>
-          <Modal.Title className="animatedLine">{user.user.firstName} {user.user.lastName}</Modal.Title>
+          <Modal.Title className="text-dark">Edit</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          <h3 className="animatedLine">{user.user.username}</h3>
           <h5>Databases</h5>
           <select
             className="form-select"
@@ -172,4 +174,4 @@ const ModalEdit = (user) => {
 };
 
 
-export default ModalEdit;
+export default ModalEditUser;
