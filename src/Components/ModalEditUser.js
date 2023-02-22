@@ -6,9 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {updateUser} from "../Redux/Actions/AllActions/AdminAction";
+import {getAllUsers, updateUser} from "../Redux/Actions/AllActions/AdminAction";
 import {MDBIcon} from "mdb-react-ui-kit";
-
+import Select from "react-select/base";
+import { MultiSelect } from "react-multi-select-component";
 
 const ModalEditUser = (user) => {
 
@@ -18,9 +19,9 @@ const ModalEditUser = (user) => {
   const dispatch = useDispatch();
   const [password, setPassword] = useState("");
   const [role, setRole] = useState(user.user.role);
+  const[databases, setDatabases] = useState([]);
   const [showPassword, setshowPassword] = useState(false);
   const checkBtn = useRef();
-
 
   const onChangePassword = (e) => {
     const password = e.target.value;
@@ -31,11 +32,20 @@ const ModalEditUser = (user) => {
     setRole(role);
   };
 
+  useEffect(() => {
+    const items = user.user.availableDatabases;
+    const convertedItems = items.map(item => ({
+      label: item.charAt(0).toUpperCase() + item.slice(1),
+      value: item
+    }));
+    setDatabases(convertedItems)
+  }, [])
+
   const options = [
-    {value: 'chocolate', label: 'Chocolate'},
-    {value: 'strawberry', label: 'Strawberry'},
-    {value: 'vanilla', label: 'Vanilla'}
-  ]
+    { label: "Database_KTH", value: "database_kth" },
+    { label: "Database_KAROLINSKA", value: "database_karolinska" },
+    { label: "Database_BOLLMORA_VÅRDCENTRAL", value: "database_bollmora_vårdcentral" },
+  ];
   const required = (value) => {
     if (!value) {
       return (
@@ -52,6 +62,8 @@ const ModalEditUser = (user) => {
 
   const handleSubmit = (e) => {
     //Kalla på axios funktionen
+    const DatabaseList = databases.map(value => value.value);
+
     if (password) {
       const theEditUser = {
         identity: user.user.identity,
@@ -60,7 +72,7 @@ const ModalEditUser = (user) => {
         firstname: user.user.firstName,
         lastname: user.user.lastName,
         role: role,
-        availableDatabases: user.user.availableDatabases
+        availableDatabases: DatabaseList
       }
       dispatch(updateUser(theEditUser)).then((response) => {
         console.log(response)
@@ -76,7 +88,7 @@ const ModalEditUser = (user) => {
         firstname: user.user.firstName,
         lastname: user.user.lastName,
         role: role,
-        availableDatabases: user.user.availableDatabases
+        availableDatabases: DatabaseList
       }
       dispatch(updateUser(theEditUser)).then((response) => {
         console.log(response)
@@ -123,12 +135,15 @@ const ModalEditUser = (user) => {
         <Modal.Body>
           <h3 className="animatedLine">{user.user.username}</h3>
           <h5>Databases</h5>
-          <select
-            className="form-select"
-          >
-            <option value="ROLE_ADMIN">KTH</option>
-            <option value="ROLE_USER">ICA MAXI</option>
-          </select>
+
+          <MultiSelect
+            options={options}
+            value={databases}
+            onChange={setDatabases}
+            labelledBy="Select"
+          />
+
+
           <h5 className="mt-3">Role</h5>
           <select
             placeholder={user.user.role}

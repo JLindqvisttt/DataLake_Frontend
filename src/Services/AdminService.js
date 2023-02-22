@@ -25,7 +25,7 @@ const getAllUsers = () => {
 
 const updateUser = (theedituser) => {
   const token = JSON.parse(Cookies.get("user")).token;
-  console.log("KOMMA HIT:" + JSON.stringify(theedituser))
+  console.log("VILL SE DETTA" + JSON.stringify(theedituser))
   return axios.patch(API_URL + "updateUser", theedituser, {headers: {"Authorization": `Bearer ${token}`}})
 };
 
