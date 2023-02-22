@@ -3,7 +3,7 @@ import "../Styles/style.css"
 import {useDispatch, useSelector} from "react-redux";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import {signIn} from "../Redux/Actions/UserActions/AuthAction";
+import {signIn} from "../Redux/Actions/AllActions/AuthAction";
 import {useNavigate} from "react-router-dom";
 
 const SignIn = () => {

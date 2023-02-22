@@ -1,10 +1,10 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import Cookies from "js-cookie";
-import {signOut} from "../Redux/Actions/UserActions/AuthAction";
+import {signOut} from "../Redux/Actions/AllActions/AuthAction";
 import axios from "axios";
 import ModalEditUser from "./ModalEditUser";
 import {useDispatch} from "react-redux";
-import {getAllUsers} from "../Redux/Actions/UserActions/UserAction";
+import {getAllUsers} from "../Redux/Actions/AllActions/AdminAction";
 import {IconName} from "react-icons/io5";
 import {MDBIcon} from "mdb-react-ui-kit";
 import ModalRemoveUser from "./ModalRemoveUser";
@@ -27,7 +27,6 @@ const AdminTable = (props) => {
   }, [!updateUsers])
 
   function updateTheUserList() {
-    console.log("ao")
     setupdateUsers(true)
   }
 

@@ -8,10 +8,10 @@ import HomePage from "./Pages/HomePage";
 import ProfilePage from "./Pages/ProfilePage";
 import AdminPage from "./Pages/AdminPage";
 import {useDispatch} from "react-redux";
-import AuthVerify from "./Redux/Actions/UserActions/AuthVerify";
+import AuthVerify from "./Redux/Actions/AllActions/AuthVerify";
 import {useCallback, useEffect} from "react";
-import {signOut} from "./Redux/Actions/UserActions/AuthAction";
-import EventBus from "./Redux/Actions/UserActions/EventBus";
+import {signOut} from "./Redux/Actions/AllActions/AuthAction";
+import EventBus from "./Redux/Actions/AllActions/EventBus";
 
 const App = () => {
 

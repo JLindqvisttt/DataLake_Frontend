@@ -7,7 +7,7 @@ import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {MDBIcon} from "mdb-react-ui-kit";
-import {removeUser} from "../Redux/Actions/UserActions/AdminAction";
+import {removeUser} from "../Redux/Actions/AllActions/AdminAction";
 
 
 const ModalRemoveUser = (user) => {

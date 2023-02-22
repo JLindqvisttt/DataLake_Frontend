@@ -6,12 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUser} from "../Redux/Actions/UserActions/UserAction";
+import {updateUser} from "../Redux/Actions/AllActions/UserAction";
 import {MDBIcon} from "mdb-react-ui-kit";
 import Input from "react-validation/build/input";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import {addUser} from "../Redux/Actions/UserActions/AdminAction";
+import {addUser} from "../Redux/Actions/AllActions/AdminAction";
 import {isEmail} from "validator";
 const required = (value) => {
   if (!value) {

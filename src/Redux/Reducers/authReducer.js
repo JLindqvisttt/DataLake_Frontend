@@ -1,4 +1,4 @@
-import {STATES} from "../Actions/UserActions/AuthAction";
+import {STATES} from "../Actions/AllActions/AuthAction";
 import Cookies from "js-cookie";
 
 const user = Cookies.get('user');

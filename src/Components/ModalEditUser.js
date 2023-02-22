@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch} from "react-redux";
-import {updateUser} from "../Redux/Actions/UserActions/UserAction";
+import {updateUser} from "../Redux/Actions/AllActions/AdminAction";
 import {MDBIcon} from "mdb-react-ui-kit";
 
 
