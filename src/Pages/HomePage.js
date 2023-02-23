@@ -16,7 +16,6 @@ const HomePage = () => {
   useEffect(() => {
     if (Cookies.get('user')) {
       const items = JSON.parse(Cookies.get('user')).availableDatabases;
-      console.log("|||" + items)
       const convertedItems = items.map(item => ({
         label: item.charAt(0).toUpperCase() + item.slice(1),
         value: item

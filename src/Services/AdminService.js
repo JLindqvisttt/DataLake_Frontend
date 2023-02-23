@@ -2,12 +2,13 @@ import axios from "axios";
 import Cookies from 'js-cookie'
 
 const API_URL = "http://localhost:8085/api/admin/"
-const token = JSON.parse(Cookies.get("user")).token;
+
 const removeUser = (theRemoveUser) => {
+  const token = JSON.parse(Cookies.get("user")).token;
   return axios.post(API_URL + "removeUser", theRemoveUser, {headers: {"Authorization": `Bearer ${token}`}})
 };
 
-const addUser = (username,password,firstname,lastname) => {
+const addUser = (username, password, firstname, lastname) => {
   const token = JSON.parse(Cookies.get("user")).token;
   return axios.post(API_URL + "signUp", {
     username,
@@ -25,7 +26,6 @@ const getAllUsers = () => {
 
 const updateUser = (theedituser) => {
   const token = JSON.parse(Cookies.get("user")).token;
-  console.log("VILL SE DETTA" + JSON.stringify(theedituser))
   return axios.patch(API_URL + "updateUser", theedituser, {headers: {"Authorization": `Bearer ${token}`}})
 };
 

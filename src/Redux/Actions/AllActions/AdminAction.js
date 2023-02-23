@@ -8,12 +8,16 @@ export const USERSTATE = {
   ADD_USER: "ADD_USER",
   ADD_USER_FAIL: "ADD_USER_FAIL",
   SET_MESSAGE: "SET_MESSAGE",
+  CLEAR_MESSAGE: "CLEAR_MESSAGE",
   GET_ALL_USER: "GET_ALL_USER",
   GET_ALL_USER_FAIL: "GET_ALL_USER_FAIL",
   UPDATE_USER: "UPDATE_USER",
   UPDATE_USER_FAIL: "UPDATE_USER_FAIL",
 };
 
+export const clearMessage = () => ({
+  type: USERSTATE.CLEAR_MESSAGE,
+});
 
 export const getAllUsers = () => (dispatch) => {
   return AdminService.getAllUsers().then(
@@ -25,6 +29,7 @@ export const getAllUsers = () => (dispatch) => {
         payload: {users: jsonResp}
       });
       return jsonResp;
+      console.log(jsonResp)
     },
     (error) => {
       const message =
@@ -49,7 +54,6 @@ export const getAllUsers = () => (dispatch) => {
 }
 
 export const addUser = (userEmail, password,firstname,lastname) => (dispatch) => {
-  console.log("**" + userEmail +  password+ firstname+ lastname);
   return AdminService.addUser(userEmail, password, firstname, lastname).then(
     (response) => {
       dispatch({
@@ -60,7 +64,7 @@ export const addUser = (userEmail, password,firstname,lastname) => (dispatch) =>
         type: USERSTATE.SET_MESSAGE,
         payload: response.data.message,
       });
-
+      console.log(response.data.message)
       return Promise.resolve();
     },
     (error) => {
@@ -86,12 +90,17 @@ export const addUser = (userEmail, password,firstname,lastname) => (dispatch) =>
 
 export const removeUser = (removeUser) => (dispatch) => {
   return AdminService.removeUser(removeUser).then(
-    (data) => {
+    (response) => {
       dispatch({
         type: USERSTATE.REMOVE_USER,
-        payload: {users: data}
       });
-      return data;
+
+      dispatch({
+        type: USERSTATE.SET_MESSAGE,
+        payload: response.data.message,
+      });
+      console.log(response.data.message)
+      return Promise.resolve();
     },
     (error) => {
       const message =
@@ -110,19 +119,24 @@ export const removeUser = (removeUser) => (dispatch) => {
         payload: message,
       });
 
-      return error.response;
+      return Promise.reject();
     }
   );
 }
 
 export const updateUser = (editUser) => (dispatch) => {
   return AdminService.updateUser(editUser).then(
-    (data) => {
+    (response) => {
       dispatch({
         type: USERSTATE.UPDATE_USER,
-        payload: {users: data}
       });
-      return data;
+
+      dispatch({
+        type: USERSTATE.SET_MESSAGE,
+        payload: response.data.message,
+      });
+      console.log(response.data.message)
+      return Promise.resolve();
     },
     (error) => {
       console.log(error)
@@ -142,7 +156,9 @@ export const updateUser = (editUser) => (dispatch) => {
         payload: message,
       });
 
-      return error.response;
+      return Promise.reject();
     }
   );
 }
+
+

@@ -2,13 +2,13 @@ import React, {useCallback, useEffect, useState} from 'react';
 import Cookies from "js-cookie";
 import {signOut} from "../Redux/Actions/AllActions/AuthAction";
 import axios from "axios";
-import ModalEditUser from "./ModalEditUser";
+import ModalEditUser_Admin from "./ModalEditUser_Admin";
 import {useDispatch} from "react-redux";
 import {getAllUsers} from "../Redux/Actions/AllActions/AdminAction";
 import {IconName} from "react-icons/io5";
 import {MDBIcon} from "mdb-react-ui-kit";
-import ModalRemoveUser from "./ModalRemoveUser";
-import ModalAddUser from "./ModalAddUser";
+import ModalRemoveUser_Admin from "./ModalRemoveUser_Admin";
+import ModalAddUser_Admin from "./ModalAddUser_Admin";
 
 const AdminTable = (props) => {
 
@@ -52,7 +52,7 @@ const AdminTable = (props) => {
               </button>
             </th>
             <th>
-              <ModalAddUser/>
+              <ModalAddUser_Admin/>
             </th>
           </tr>
           </thead>
@@ -65,9 +65,9 @@ const AdminTable = (props) => {
                     <td>{user.firstName}</td>
                     <td>{user.lastName}</td>
                     <td>{user.role}</td>
-                    <td><ModalEditUser user={user}/></td>
+                    <td><ModalEditUser_Admin user={user}/></td>
                     <td></td>
-                    <td><ModalRemoveUser user={user}/></td>
+                    <td><ModalRemoveUser_Admin user={user}/></td>
                   </tr>
                 }
               }

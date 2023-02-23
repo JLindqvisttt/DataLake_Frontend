@@ -11,7 +11,7 @@ import {MDBIcon} from "mdb-react-ui-kit";
 import Input from "react-validation/build/input";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
-import {addUser} from "../Redux/Actions/AllActions/AdminAction";
+import {addUser, clearMessage} from "../Redux/Actions/AllActions/AdminAction";
 import {isEmail} from "validator";
 const required = (value) => {
   if (!value) {
@@ -61,13 +61,9 @@ const validPassword = (value) => {
     );
   }
 };
-const ModalAddUser = () => {
+const ModalAddUser_Admin = () => {
 
   const [show, setShow] = useState(false);
-  const [responseMsg, setResponseMsg] = useState("");
-  const [role, setRole] = useState("");
-
-
   const form = useRef();
   const checkBtn = useRef();
 
@@ -109,11 +105,12 @@ const ModalAddUser = () => {
     }
   };
   const handleShow = () => {
-    setSuccessful(false)
+    dispatch(clearMessage());
     setShow(true);
   }
   const handleClose = () => {
-    setResponseMsg("")
+    dispatch(clearMessage());
+    setSuccessful(false);
     setShow(false);
   }
 
@@ -130,19 +127,6 @@ const ModalAddUser = () => {
         });
     }
   };
-  function getMessage() {
-    if (responseMsg.status === 200)
-      return <div className="form-group-sm mt-2">
-        <div className="alert alert-success" role="alert">
-          {responseMsg.data}
-        </div>
-      </div>
-    return <div className="form-group-sm mt-2" hidden={!responseMsg}>
-      <div className="alert alert-danger" role="alert">
-        {responseMsg.data}
-      </div>
-    </div>
-  }
 
   return (
     <>
@@ -240,4 +224,4 @@ const ModalAddUser = () => {
 };
 
 
-export default ModalAddUser;
+export default ModalAddUser_Admin;

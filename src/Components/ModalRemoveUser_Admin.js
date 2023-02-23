@@ -5,51 +5,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {MDBIcon} from "mdb-react-ui-kit";
-import {removeUser} from "../Redux/Actions/AllActions/AdminAction";
+import {clearMessage, removeUser} from "../Redux/Actions/AllActions/AdminAction";
 
 
-const ModalRemoveUser = (user) => {
+const ModalRemoveUser_Admin = (user) => {
 
   const [show, setShow] = useState(false);
-  const [responseMsg, setResponseMsg] = useState("");
-  const handleShow = () => setShow(true);
   const dispatch = useDispatch();
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState(user.user.role);
-  const [showPassword, setshowPassword] = useState(false);
-  const checkBtn = useRef();
-
+  const [successful, setSuccessful] = useState(false);
+  const {message} = useSelector(state => state.message);
 
   const handleClose = () => {
-    setResponseMsg("")
+    dispatch(clearMessage());
     setShow(false);
   }
-
+  const handleShow = () => {
+    dispatch(clearMessage());
+    setShow(true);
+  }
   const handleSubmit = (e) => {
     const theRemoveUser = {identity: user.user.identity}
-    dispatch(removeUser(theRemoveUser)).then((response) => {
-      console.log(response)
-      setResponseMsg(response)
+    dispatch(removeUser(theRemoveUser)).then(() => {
+      setSuccessful(true);
     })
-      .catch((err) => {
-        console.log("ERROR" + err.body)
+      .catch(() => {
+        setSuccessful(false);
       })
-  }
-
-  function getMessage() {
-    if (responseMsg.status === 200)
-      return <div className="form-group-sm mt-2">
-        <div className="alert alert-success" role="alert">
-          {responseMsg.data}
-        </div>
-      </div>
-    return <div className="form-group-sm mt-2" hidden={!responseMsg}>
-      <div className="alert alert-danger" role="alert">
-        {responseMsg.data}
-      </div>
-    </div>
   }
 
   return (
@@ -66,7 +49,15 @@ const ModalRemoveUser = (user) => {
           <Modal.Title className="textOrange">Remove {user.user.username}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {getMessage()}
+          {message && (
+            <div className="form-group">
+              <div
+                className={successful ? "alert alert-success" : "alert alert-danger"}
+                role="alert">
+                {message}
+              </div>
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" className="btn btn-danger" onClick={event => {
@@ -83,4 +74,4 @@ const ModalRemoveUser = (user) => {
 };
 
 
-export default ModalRemoveUser;
+export default ModalRemoveUser_Admin;
