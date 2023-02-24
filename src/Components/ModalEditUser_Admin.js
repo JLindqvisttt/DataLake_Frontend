@@ -194,6 +194,7 @@ const ModalEditUser_Admin = (user) => {
                     value={password}
                     placeholder="New password"
                     id="floatingPassword"
+                    maxLength={40}
                     onChange={onChangePassword}
                     validations={[required, validPassword]}
                   />

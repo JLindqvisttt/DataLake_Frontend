@@ -73,6 +73,7 @@ const SignIn = () => {
                       className="form-control form-control-lg"
                       name="username"
                       id="userEmail"
+                      maxLength={50}
                       value={username}
                       onChange={onChangeUsername}
                       validations={[required]}
@@ -85,6 +86,7 @@ const SignIn = () => {
                       className="form-control form-control-lg"
                       name="password"
                       value={password}
+                      maxLength={40}
                       placeholder="Password"
                       id="floatingPassword"
                       onChange={onChangePassword}

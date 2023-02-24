@@ -152,7 +152,7 @@ const ModalAddUser_Admin = () => {
                     name = "email"
                     value={email}
                     placeholder="name@example.com"
-                    maxLength={65}
+                    maxLength={50}
                     onChange={onChangeEmail}
                     validations={[required, validEmail]}
                   />
@@ -163,7 +163,7 @@ const ModalAddUser_Admin = () => {
                     <Input
                       value={firstname}
                       type="text"
-                      maxLength={65}
+                      maxLength={50}
                       className="form-control form-control-lg"
                       placeholder="First name"
                       onChange={onChangeFirstname}
@@ -174,7 +174,7 @@ const ModalAddUser_Admin = () => {
                     <Input
                       value={lastname}
                       type="text"
-                      maxLength={65}
+                      maxLength={50}
                       className="form-control form-control-lg"
                       placeholder="Last name"
                       onChange={onChangeLastname}
@@ -187,7 +187,7 @@ const ModalAddUser_Admin = () => {
                     type="password"
                     className="form-control form-control-lg"
                     value={password}
-                    maxLength={65}
+                    maxLength={40}
                     id="floatingPassword"
                     placeholder="Password"
                     onChange={onChangePassword}

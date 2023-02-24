@@ -113,9 +113,10 @@ const ModalEditPasswordUser_User = () => {
                     <Input
                       value={oldPassword}
                       type="password"
-                      maxLength={65}
+                      maxLength={40}
                       className="form-control form-control-lg"
                       placeholder="Current password"
+                      maxLength={40}
                       onChange={onChangeOldPassword}
                       validations={[required, validPassword]}
                     />
@@ -124,7 +125,7 @@ const ModalEditPasswordUser_User = () => {
                     <Input
                       value={newPassword}
                       type="password"
-                      maxLength={65}
+                      maxLength={40}
                       className="form-control form-control-lg"
                       placeholder="New password"
                       onChange={onChangeNewPassword}

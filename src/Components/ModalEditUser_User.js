@@ -117,7 +117,7 @@ const ModalEditUser_User = () => {
                     <Input
                       value={userFirstname}
                       type="text"
-                      maxLength={65}
+                      maxLength={50}
                       className="form-control form-control-lg"
                       placeholder="First name"
                       onChange={onChangeUserFirstname}
@@ -128,7 +128,7 @@ const ModalEditUser_User = () => {
                     <Input
                       value={userLastname}
                       type="text"
-                      maxLength={65}
+                      maxLength={50}
                       className="form-control form-control-lg"
                       placeholder="Last name"
                       onChange={onChangeUserLastname}
