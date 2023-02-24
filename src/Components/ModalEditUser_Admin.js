@@ -160,9 +160,7 @@ const ModalEditUser_Admin = (user) => {
             {!successful && (
               <div>
 
-
                 <h5>Databases </h5>
-
                 <MultiSelect
                   options={options}
                   value={databases}
@@ -179,6 +177,7 @@ const ModalEditUser_Admin = (user) => {
                   defaultValue={role}
                   onChange={setRole}
                   options={roleOptions}
+                  isSearchable={false}
                 />
 
                 <div className="form-check form-check-inline mt-3" onChange={event => {

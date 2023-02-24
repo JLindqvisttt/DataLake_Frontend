@@ -71,7 +71,7 @@ const HomePage = () => {
             <section className=" mt-3">
               <h5 className="mt-3 text-white-50">Which database you want to work with</h5>
               <div className="col-3">
-                <Select className={"form-select-lg"} options={databases} onChange={setSelectedDatabases} defaultValue={selectedDatabases}/>
+                <Select className={"form-select-lg"} options={databases} onChange={setSelectedDatabases} defaultValue={selectedDatabases}  isSearchable={false}/>
               </div>
               {whichDatabasesSelected()}
             </section>
