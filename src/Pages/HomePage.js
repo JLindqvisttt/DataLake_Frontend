@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 
 import Select from 'react-select'
 import {MDBIcon} from "mdb-react-ui-kit";
+import Footer from "../Components/Footer";
 
 
 const HomePage = () => {
@@ -64,7 +65,7 @@ const HomePage = () => {
   return (
     <div>
       <Sidebar/>
-      <div className="container">
+      <div className="container" style={{height:'100vh'}}>
         <div className="row justify-content-md-center">
           <div className="col m-5">
             <h1 className="text-white mb-5 animatedLine">Home page</h1>
@@ -75,12 +76,10 @@ const HomePage = () => {
               </div>
               {whichDatabasesSelected()}
             </section>
-
-
           </div>
         </div>
       </div>
-
+      <Footer/>
     </div>
   );
 };

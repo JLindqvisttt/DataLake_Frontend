@@ -8,6 +8,7 @@ import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import ModalEditUser_User from "../Components/ModalEditUser_User";
 import ModalEditPasswordUser_User from "../Components/ModalEditPasswordUser_User";
+import Footer from "../Components/Footer";
 
 
 const ProfilePage = () => {
@@ -47,9 +48,9 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="container-fluid ps-md-0">
+    <div>
       <Sidebar/>
-      <div className="container">
+      <div className="container" style={{height:'100vh'}}>
         <div className="row justify-content-md-center">
           <div className="col-8 m-5">
             <h1 className="text-white mb-5 animatedLine">Profile page</h1>
@@ -69,7 +70,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-
+      <Footer/>
     </div>
   );
 };
