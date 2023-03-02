@@ -11,6 +11,7 @@ import "../Styles/Sidebar.css"
 import Cookies from 'js-cookie'
 import {useDispatch} from "react-redux";
 import {signOut} from "../Redux/Actions/AllActions/AuthAction";
+import {MDBIcon} from "mdb-react-ui-kit";
 
 
 const Sidebar = (props) => {
@@ -23,15 +24,16 @@ const Sidebar = (props) => {
     setUserRole(JSON.parse(Cookies.get('user')).role)
   }, [])
 
-  const signout = useCallback(() =>{
+  const signout = useCallback(() => {
     dispatch(signOut());
-  },[dispatch])
+  }, [dispatch])
 
   return (
     <div style={{position: 'fixed', overflow: 'scroll initial', height: '100vh', zIndex: '1000'}}>
       <CDBSidebar style={{backgroundColor: "#131316", boxShadow: '2px 2px 10px 1px rgb(255, 165, 0,0.2)'}}>
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large text-dark"></i>} className="animatedLine">
-          <a href="/Users/Nonno/Documents/GitHub/DataLake_Frontend/src/Pages/HomePage" className="text-decoration-none sidebarTitle" style={{color: 'inherit'}}>
+          <a href="/Users/Nonno/Documents/GitHub/DataLake_Frontend/src/Pages/HomePage"
+             className="text-decoration-none sidebarTitle" style={{color: 'inherit'}}>
             Data lake
           </a>
         </CDBSidebarHeader>
@@ -39,7 +41,7 @@ const Sidebar = (props) => {
         <CDBSidebarContent className="sidebar-content">
 
           <CDBSidebarMenu>
-            <NavLink  to="/Homepage" activeclassname="activeClicked">
+            <NavLink to="/Homepage" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="home animatedLine">Home</CDBSidebarMenuItem>
             </NavLink>
 
@@ -47,14 +49,17 @@ const Sidebar = (props) => {
               <CDBSidebarMenuItem icon="user animatedLine">{userEmail}</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink  to="/" activeclassname="activeClicked" onClick={ signout  }>
+            <NavLink to="/" activeclassname="activeClicked" onClick={signout}>
               <CDBSidebarMenuItem icon="sign-out-alt text-danger">Sign out</CDBSidebarMenuItem>
             </NavLink>
             <div>
               <div hidden={userRole !== "ROLE_ADMIN"}>
                 <hr/>
-                <NavLink  to="/Adminpage" activeclassname="activeClicked ">
-                  <CDBSidebarMenuItem icon="lock-open text-info">Admin page </CDBSidebarMenuItem>
+                <NavLink to="/Users_Admin" activeclassname="activeClicked ">
+                  <CDBSidebarMenuItem icon="users-cog text-info">Users </CDBSidebarMenuItem>
+                </NavLink>
+                <NavLink to="/Datasets_Admin" activeclassname="activeClicked ">
+                  <CDBSidebarMenuItem icon="plus text-success">Add new datasets </CDBSidebarMenuItem>
                 </NavLink>
               </div>
 
@@ -66,8 +71,9 @@ const Sidebar = (props) => {
   );
 }
 
-function remove(){
+function remove() {
   console.log("apa")
   Cookies.remove('user')
 }
+
 export default Sidebar;

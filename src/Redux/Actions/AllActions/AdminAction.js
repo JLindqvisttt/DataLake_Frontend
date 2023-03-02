@@ -13,6 +13,10 @@ export const USERSTATE = {
   GET_ALL_USER_FAIL: "GET_ALL_USER_FAIL",
   UPDATE_USER: "UPDATE_USER",
   UPDATE_USER_FAIL: "UPDATE_USER_FAIL",
+  ADD_DATASET_PATIENT: "ADD_DATASET_PATIENT",
+  ADD_DATASET_SYMPTOMS: "ADD_DATASET_SYMPTOMS",
+  ADD_DATASET_PATIENT_FAIL: "ADD_DATASET_PATIENT_FAIL",
+  ADD_DATASET_SYMPTOMS_FAIL: "ADD_DATASET_SYMPTOMS_FAIL",
 };
 
 export const clearMessage = () => ({
@@ -161,4 +165,77 @@ export const updateUser = (editUser) => (dispatch) => {
   );
 }
 
+/** NEW datasets functions*/
+export const addDatasets_Patients = (patientFile) => {
+  return (dispatch) => {
+    return AdminService.addDatasets_Patients(patientFile)
+      .then((response) => {
+        dispatch({
+          type: USERSTATE.ADD_DATASET_PATIENT,
+        });
 
+        dispatch({
+          type: USERSTATE.SET_MESSAGE,
+          payload: response.data.message,
+        });
+        console.log(response.data.message)
+        return Promise.resolve();
+      }, (error) => {
+        console.log(error)
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        dispatch({
+          type: USERSTATE.ADD_DATASET_PATIENT_FAIL,
+        });
+
+        dispatch({
+          type: STATES.SET_MESSAGE,
+          payload: message,
+        });
+
+        return Promise.reject();
+      });
+  };
+}
+
+export const addDatasets_Symptoms = (symptomsFile) => (dispatch) => {
+  return AdminService.addDatasets_Symptoms(symptomsFile).then(
+    (response) => {
+      dispatch({
+        type: USERSTATE.ADD_DATASET_SYMPTOMS,
+      });
+
+      dispatch({
+        type: USERSTATE.SET_MESSAGE,
+        payload: response.data.message,
+      });
+      console.log(response.data.message)
+      return Promise.resolve();
+    },
+    (error) => {
+      console.log(error)
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: USERSTATE.ADD_DATASET_SYMPTOMS_FAIL,
+      });
+
+      dispatch({
+        type: STATES.SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+}

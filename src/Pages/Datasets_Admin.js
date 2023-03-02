@@ -9,9 +9,10 @@ import {Navigate} from "react-router-dom";
 import Cookies from "js-cookie";
 import AdminTable from "../Components/AdminTable";
 import Footer from "../Components/Footer";
+import AddDatasetsSection from "../Components/AddDatasetsSection";
 
 
-const AdminPage = () => {
+const Datasets_Admin = () => {
 
 
   if (!Cookies.get('user')) {
@@ -27,8 +28,12 @@ const AdminPage = () => {
       <div className="container" style={{height:'100vh'}}>
         <div className="row justify-content-md-center">
           <div className="col-lg-7 m-5">
-            <h1 className="text-white mb-5 animatedLine">Admin page</h1>
-            <AdminTable/>
+            <h1 className="text-white mb-5 animatedLine">Datasets page</h1>
+            <p className="text-white-50">
+              Do you want to add a new datasets, in order to do that you need to have a file that has
+              symptoms and one with patient data that is related to the data.
+            </p>
+            <AddDatasetsSection/>
           </div>
         </div>
       </div>
@@ -37,4 +42,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default Datasets_Admin;
