@@ -13,8 +13,8 @@ export const USERSTATE = {
 };
 
 
-export const updateUser = (editUser) => (dispatch) => {
-  return UserService.updateUser(editUser).then(
+export const updateUserName = (editUser) => (dispatch) => {
+  return UserService.updateUserName(editUser).then(
     (response) => {
       dispatch({
         type: USERSTATE.UPDATE_USER_FIRSTNAME_LASTNAME,

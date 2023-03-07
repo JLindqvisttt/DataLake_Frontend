@@ -24,7 +24,7 @@ const AdminTable = (props) => {
         console.log(JSON.parse(users))
         setUserList(JSON.parse(users))
       })
-  }, [!updateUsers])
+  }, [updateUsers])
 
   function updateTheUserList() {
     setupdateUsers(true)

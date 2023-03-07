@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {clearMessage, getAllUsers, updateUser} from "../Redux/Actions/AllActions/AdminAction";
+import {clearMessage, getAllDatasets, getAllUsers, updateUser} from "../Redux/Actions/AllActions/AdminAction";
 import {MDBIcon} from "mdb-react-ui-kit";
 import Select from 'react-select'
 import {MultiSelect} from "react-multi-select-component";
@@ -34,6 +34,8 @@ const ModalEditUser_Admin = (user) => {
   const checkBtn = useRef();
   const [successful, setSuccessful] = useState(false);
   const {message} = useSelector(state => state.message);
+
+  const [databasesOptions, setdatabasesOptions] = useState([]);
   const form = useRef();
   const onChangePassword = (e) => {
     const password = e.target.value;
@@ -62,13 +64,21 @@ const ModalEditUser_Admin = (user) => {
         setRole(converted)
       }
     }
+    dispatch(getAllDatasets())
+      .then((datasets) => {
+        if (typeof datasets === 'string') datasets = JSON.parse(datasets);
+        const convertedItems = datasets.map((item) => ({
+          label: item.charAt(0).toUpperCase() + item.slice(1),
+          value: item
+        }));
+        console.log("Converted items:", JSON.stringify(convertedItems));
+        setdatabasesOptions(convertedItems)
+      })
+
+
   }, [])
 
-  const options = [
-    {label: "Database_KTH", value: "database_kth"},
-    {label: "Database_KAROLINSKA", value: "database_karolinska"},
-    {label: "Database_BOLLMORA_VÅRDCENTRAL", value: "database_bollmora_vårdcentral"},
-  ];
+
   const roleOptions = [
     {label: "ROLE_USER", value: "ROLE_USER"},
     {label: "ROLE_ADMIN", value: "ROLE_ADMIN"},
@@ -101,11 +111,8 @@ const ModalEditUser_Admin = (user) => {
     if (password) {
       if (checkBtn.current.context._errors.length === 0) {
         const theEditUser = {
-          identity: user.user.identity,
-          username: user.user.username,
+          id: user.user.identity,
           password: password,
-          firstname: user.user.firstName,
-          lastname: user.user.lastName,
           role: role.value,
           availableDatabases: DatabaseList
         }
@@ -122,9 +129,6 @@ const ModalEditUser_Admin = (user) => {
 
       const theEditUser = {
         identity: user.user.identity,
-        username: user.user.username,
-        firstname: user.user.firstName,
-        lastname: user.user.lastName,
         role: role,
         availableDatabases: DatabaseList
       }
@@ -162,7 +166,7 @@ const ModalEditUser_Admin = (user) => {
 
                 <h5>Databases </h5>
                 <MultiSelect
-                  options={options}
+                  options={databasesOptions}
                   value={databases}
                   onChange={setDatabases}
                   labelledBy="Select"

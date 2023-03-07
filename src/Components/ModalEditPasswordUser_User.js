@@ -71,8 +71,7 @@ const ModalEditPasswordUser_User = () => {
     setSuccessful(false);
     form.current.validateAll();
     const theEditUser = {
-      identity: user.id,
-      username: user.email,
+      id: user.id,
       password: newPassword,
       checkPassword: oldPassword
     }

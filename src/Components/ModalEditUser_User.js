@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Button, Modal, NavLink} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUser} from "../Redux/Actions/AllActions/UserAction";
+import {updateUser, updateUserName} from "../Redux/Actions/AllActions/UserAction";
 import {MDBIcon} from "mdb-react-ui-kit";
 import {MultiSelect} from "react-multi-select-component";
 import Cookies from "js-cookie";
@@ -75,13 +75,12 @@ const ModalEditUser_User = () => {
     setSuccessful(false);
     form.current.validateAll();
     const theEditUser = {
-      identity: user.id,
-      username: user.email,
+      id: user.id,
       firstname: userFirstname,
       lastname: userLastname,
     }
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(updateUser(theEditUser))
+      dispatch(updateUserName(theEditUser))
         .then(() => {
           setSuccessful(true);
         })

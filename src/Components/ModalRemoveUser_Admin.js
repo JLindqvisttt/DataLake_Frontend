@@ -26,7 +26,7 @@ const ModalRemoveUser_Admin = (user) => {
     setShow(true);
   }
   const handleSubmit = (e) => {
-    const theRemoveUser = {identity: user.user.identity}
+    const theRemoveUser = {id: user.user.identity}
     dispatch(removeUser(theRemoveUser)).then(() => {
       setSuccessful(true);
     })

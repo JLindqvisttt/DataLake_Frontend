@@ -11,6 +11,8 @@ export const USERSTATE = {
   CLEAR_MESSAGE: "CLEAR_MESSAGE",
   GET_ALL_USER: "GET_ALL_USER",
   GET_ALL_USER_FAIL: "GET_ALL_USER_FAIL",
+  GET_ALL_DATASET: "GET_ALL_DATASET",
+  GET_ALL_DATASET_FAIL: "GET_ALL_DATASET_FAIL",
   UPDATE_USER: "UPDATE_USER",
   UPDATE_USER_FAIL: "UPDATE_USER_FAIL",
   ADD_DATASET_PATIENT: "ADD_DATASET_PATIENT",
@@ -22,6 +24,39 @@ export const USERSTATE = {
 export const clearMessage = () => ({
   type: USERSTATE.CLEAR_MESSAGE,
 });
+
+export const getAllDatasets = () => (dispatch) => {
+  return AdminService.getAllDatasets().then(
+    (data) => {
+      const jsonResp = JSON.stringify(data.data)
+
+      dispatch({
+        type: USERSTATE.GET_ALL_DATASET,
+        payload: {datasets: jsonResp}
+      });
+      return jsonResp;
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: USERSTATE.GET_ALL_DATASET_FAIL,
+      });
+
+      dispatch({
+        type: STATES.SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+}
 
 export const getAllUsers = () => (dispatch) => {
   return AdminService.getAllUsers().then(
@@ -166,9 +201,9 @@ export const updateUser = (editUser) => (dispatch) => {
 }
 
 /** NEW datasets functions*/
-export const addDatasets_Patients = (patientFile) => {
+export const addDatasets_Patients = (patientFile,datasetName) => {
   return (dispatch) => {
-    return AdminService.addDatasets_Patients(patientFile)
+    return AdminService.addDatasets_Patients(patientFile,datasetName)
       .then((response) => {
         dispatch({
           type: USERSTATE.ADD_DATASET_PATIENT,
@@ -203,8 +238,8 @@ export const addDatasets_Patients = (patientFile) => {
   };
 }
 
-export const addDatasets_Symptoms = (symptomsFile) => (dispatch) => {
-  return AdminService.addDatasets_Symptoms(symptomsFile).then(
+export const addDatasets_Symptoms = (symptomsFile,datasetName) => (dispatch) => {
+  return AdminService.addDatasets_Symptoms(symptomsFile,datasetName).then(
     (response) => {
       dispatch({
         type: USERSTATE.ADD_DATASET_SYMPTOMS,
