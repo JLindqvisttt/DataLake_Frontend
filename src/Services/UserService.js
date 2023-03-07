@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie'
 import axios from "axios";
 
-const API_URL = "http://localhost:8086/api/user/"
+const API_URL = "http://localhost:8085/api/user/"
 
 const updateUserName = (theedituser) => {
   const token = JSON.parse(Cookies.get("user")).token;

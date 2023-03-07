@@ -1,8 +1,8 @@
 import axios from "axios";
 import Cookies from 'js-cookie'
 
-const API_URL = "http://localhost:8086/api/admin/"
-const API_PATIENT = "http://localhost:8086/api/patient/"
+const API_URL = "http://localhost:8085/api/admin/"
+const API_PATIENT = "http://localhost:8085/api/patient/"
 const removeUser = (theRemoveUser) => {
   const token = JSON.parse(Cookies.get("user")).token;
   return axios.post(API_URL + "removeUser", theRemoveUser, {headers: {"Authorization": `Bearer ${token}`}})
