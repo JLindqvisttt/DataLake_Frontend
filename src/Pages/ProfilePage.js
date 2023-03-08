@@ -50,7 +50,7 @@ const ProfilePage = () => {
   return (
     <div>
       <Sidebar/>
-      <div className="container" style={{height:'100vh'}}>
+      <div className="container" style={{height: '100vh'}}>
         <div className="row justify-content-md-center">
           <div className="col-8 m-5">
             <h1 className="text-white mb-5 animatedLine">Profile page</h1>

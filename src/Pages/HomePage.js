@@ -7,12 +7,18 @@ import Cookies from "js-cookie";
 import Select from 'react-select'
 import {MDBIcon} from "mdb-react-ui-kit";
 import Footer from "../Components/Footer";
-
+import {useDispatch} from "react-redux";
+import {getAllPatients, getPatientsByDataset} from "../Redux/Actions/AllActions/UserAction";
+import {utils, write as writeExcel} from 'xlsx';
+import {saveAs} from 'file-saver';
 
 const HomePage = () => {
-
+  const dispatch = useDispatch();
   const [databases, setDatabases] = useState([]);
   const [selectedDatabases, setSelectedDatabases] = useState(null);
+  const [successfulGetData, setsuccessfulGetData] = useState(false);
+  const [failedGetData, setfailedGetData] = useState(false);
+  const [dataDownload, setdataDownload] = useState([]);
 
   useEffect(() => {
     if (Cookies.get('user')) {
@@ -31,50 +37,107 @@ const HomePage = () => {
   }
 
   function whichDatabasesSelected() {
-    if (selectedDatabases){
-      if (selectedDatabases.value === "database_kth") {
+    if (selectedDatabases) {
+      if (selectedDatabases.value === "261") {
         return (
           <div>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Hämta all data för KTH</button>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Ge mig all data som omkom i cancer i kth</button>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Vilket ämne orsakar cancer mest?</button>
-          </div>
-        )
-      }
-      if (selectedDatabases.value === "database_karolinska") {
-        return (
-          <div>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Hämta all data för karolinska</button>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Ge mig all data som omkom i cancer</button>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Vilket ämne orsakar cancer mest?</button>
-          </div>
-        )
-      }
-      if (selectedDatabases.value === "database_bollmora_vårdcentral") {
-        return (
-          <div>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Hämta all data </button>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Ge mig all data som omkom i cancer</button>
-            <button className="button fw-bold m-4"><MDBIcon fas icon="sync"/> Vilket ämne orsakar cancer mest?</button>
+            <button className="button fw-bold m-4" onClick={event => getPatientByDatasetFunction()}><MDBIcon fas
+                                                                                                             icon="sync"/> Get
+              all patients from this dataset
+            </button>
           </div>
         )
       }
     }
   }
 
+  function getAllPatientsFunction() {
+    setsuccessfulGetData(false)
+    dispatch(getAllPatients())
+      .then((datasets) => {
+        setsuccessfulGetData(true)
+        setdataDownload(datasets)
+      }).catch((err) => {
+      setfailedGetData(true)
+    })
+  }
+
+  function getPatientByDatasetFunction() {
+    setsuccessfulGetData(false)
+    dispatch(getPatientsByDataset(selectedDatabases.value))
+      .then((datasets) => {
+        setsuccessfulGetData(true)
+        setdataDownload(datasets)
+        console.log(datasets)
+      }).catch((err) => {
+      setfailedGetData(true)
+    })
+  }
+
+  function close() {
+    setsuccessfulGetData(false)
+    setdataDownload(null)
+  }
+  
+  function setMessageGetData() {
+    if (failedGetData)
+      return <div className="form-group-sm mt-2">
+        <div className="alert alert-danger" role="alert">
+          Failed to retrieved the data
+        </div>
+      </div>
+    if (successfulGetData) return <div className="form-group-sm mt-2">
+      <div className="alert alert-success text-center" role="alert">
+        <p>Successfully retrieved the data</p>
+        <button className="btn btn-danger m-2" onClick={event => close()}>Close</button>
+        <button className="btn btn-primary m-2" onClick={downloadJSON}><MDBIcon fas icon="download"/> Download as JSON
+        </button>
+        <button className="btn btn-primary m-2" onClick={downloadExcel}><MDBIcon fas icon="download"/> Download as Excel
+        </button>
+      </div>
+    </div>
+  }
+
+  const downloadJSON = () => {
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(dataDownload)], {type: "application/json"});
+    element.href = URL.createObjectURL(file);
+    element.download = "data.json";
+    document.body.appendChild(element);
+    element.click();
+  };
+
+  const downloadExcel = () => {
+    if (!dataDownload) return;
+    const sheet = utils.json_to_sheet(JSON.parse(dataDownload));
+    const book = utils.book_new();
+    utils.book_append_sheet(book, sheet, 'Sheet1');
+    const excelBuffer = writeExcel(book, {type: 'buffer'});
+    saveAs(new Blob([excelBuffer]), 'data.xlsx');
+  };
+
   return (
     <div>
       <Sidebar/>
-      <div className="container" style={{height:'100vh'}}>
+      <div className="container" style={{height: '100vh'}}>
         <div className="row justify-content-md-center">
           <div className="col m-5">
             <h1 className="text-white mb-5 animatedLine">Home page</h1>
             <section className=" mt-3">
               <h5 className="mt-3 text-white-50">Which database you want to work with</h5>
               <div className="col-3">
-                <Select className={"form-select-lg"} options={databases} onChange={setSelectedDatabases} defaultValue={selectedDatabases}  isSearchable={false}/>
+                <Select className={"form-select-lg"} options={databases} onChange={setSelectedDatabases}
+                        defaultValue={selectedDatabases} isSearchable={false}/>
               </div>
               {whichDatabasesSelected()}
+              <h5 className="text-white-50 mt-3">General queries</h5>
+              <button className="button fw-bold m-4" onClick={event => {
+                getAllPatientsFunction()
+              }}><MDBIcon fas icon="sync"/> Get
+                all patients from ALL datasets
+              </button>
+              {setMessageGetData()}
+
             </section>
           </div>
         </div>
