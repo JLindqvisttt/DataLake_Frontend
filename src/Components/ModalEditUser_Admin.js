@@ -111,7 +111,7 @@ const ModalEditUser_Admin = (user) => {
     if (password) {
       if (checkBtn.current.context._errors.length === 0) {
         const theEditUser = {
-          id: user.user.identity,
+          id: user.user.id,
           password: password,
           role: role.value,
           availableDatabases: DatabaseList
@@ -128,7 +128,7 @@ const ModalEditUser_Admin = (user) => {
     } else {
 
       const theEditUser = {
-        identity: user.user.identity,
+        identity: user.user.id,
         role: role,
         availableDatabases: DatabaseList
       }

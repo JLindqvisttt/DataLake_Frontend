@@ -58,7 +58,7 @@ const ProfilePage = () => {
               <div className="col-9">
                 <h1 className="text-white-50"> {userFirstname + " " + userLastname}</h1>
                 <h5 className="text-white-50"> Email : {userEmail}</h5>
-                <h4 className="text-white">Databases that you have access to</h4>
+                <h4 className="text-white">Available databases</h4>
                 {DatabaseList()}
                 <hr className="text-white"/>
               </div>
