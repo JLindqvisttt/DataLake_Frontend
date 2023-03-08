@@ -5,7 +5,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
-import {addDatasets_Patients, addDatasets_Symptoms, updateUser} from "../Redux/Actions/AllActions/AdminAction";
+import {
+  addDatasets_Patients,
+  addDatasets_Symptoms, clearMessage,
+  getAllUsers,
+  updateUser
+} from "../Redux/Actions/AllActions/AdminAction";
 import {useDispatch, useSelector} from "react-redux";
 import CheckButton from "react-validation/build/button";
 
@@ -20,12 +25,13 @@ const validName = (value) => {
 };
 
 const AddDatasetsSection = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingSymptoms, setloadingSymptoms] = useState(false);
+  const [loadingPatients, setLoadingPatients] = useState(false);
   const dispatch = useDispatch();
-  const [pressed, setPressed] = useState(true);
   const [symptomsFile, setSymptomsFile] = useState();
   const [patientFile, setPatientFile] = useState();
-  const [datasetName, setdatasetName] = useState();
+  const [datasetNamePatient, setdatasetNamePatient] = useState();
+  const [datasetNameSymptoms, setdatasetNameSymptoms] = useState();
   const [symptomsMessageError, setSymptomsMessageError] = useState(false);
   const [nameMessageError, setnameMessageError] = useState(false);
   const [successful, setSuccessful] = useState(false);
@@ -33,48 +39,60 @@ const AddDatasetsSection = () => {
 
   const form = useRef();
   const checkBtn = useRef();
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [symptomsMessageError])
+
   const onChangeSymptoms = e => {
     setSymptomsFile(e.target.files[0])
   }
   const onChangePatient = e => {
     setPatientFile(e.target.files[0])
   }
-  const onChangeDatasetName = e => {
+  const onChangeDatasetNamePatients = e => {
     const name = e.target.value;
-    setdatasetName(name)
+    setdatasetNamePatient(name)
+  }
+  const onChangeDatasetNameSymptoms = e => {
+    const name = e.target.value;
+    setdatasetNameSymptoms(name)
   }
 
-  const handleSubmit = (e) => {
-    if (datasetName) {
-      if (!patientFile) setSymptomsMessageError(true)
-      else {
-        setLoading(true);
-        dispatch(addDatasets_Patients(patientFile, datasetName))
-          .then(() => {
-            setSuccessful(true);
-            setLoading(false);
-          })
-          .catch(() => {
-            setSuccessful(false);
-            setLoading(false);
-          })
-        if (symptomsFile) {
-          setLoading(true);
-          dispatch(addDatasets_Symptoms(symptomsFile, datasetName))
-            .then(() => {
-              setSuccessful(true);
-              setLoading(false);
-            })
-            .catch(() => {
-              setSuccessful(false);
-              setLoading(false);
-            })
-        }
-        setSymptomsMessageError(false)
-        setnameMessageError(false)
-      }
+  const handleSubmitPatients = (e) => {
+    if (patientFile && datasetNamePatient!=null) {
+      setLoadingPatients(true);
+      dispatch(addDatasets_Patients(patientFile, datasetNamePatient))
+        .then(() => {
+          setSuccessful(true);
+          setLoadingPatients(false);
+        })
+        .catch(() => {
+          setSuccessful(false);
+          setLoadingPatients(false);
+        })
+      setSymptomsMessageError(false)
+      setnameMessageError(false)
+
     } else {
-      console.log("test")
+      setnameMessageError(true)
+    }
+  }
+  const handleSubmitSymptoms = (e) => {
+    if (symptomsFile && datasetNameSymptoms!=null) {
+      setloadingSymptoms(true);
+      dispatch(addDatasets_Symptoms(symptomsFile, datasetNameSymptoms))
+        .then(() => {
+          setSuccessful(true);
+          setloadingSymptoms(false);
+        })
+        .catch(() => {
+          setSuccessful(false);
+          setloadingSymptoms(false);
+        })
+      setSymptomsMessageError(false)
+      setnameMessageError(false)
+    } else {
       setnameMessageError(true)
     }
   }
@@ -88,14 +106,6 @@ const AddDatasetsSection = () => {
     }
   };
 
-  function setMessage() {
-    if (symptomsMessageError)
-      return <div className="form-group-sm mt-2" hidden={!setSymptomsFile}>
-        <div className="alert alert-danger" role="alert">
-          There are no patients admitted, you must admit patients.
-        </div>
-      </div>
-  }
 
   function setMessageName() {
     if (nameMessageError)
@@ -110,25 +120,11 @@ const AddDatasetsSection = () => {
     <div>
       <section className="bg-transparent text-white">
         <h4 className="textOrange">Add a new datasets</h4>
-        <Form onSubmit={handleSubmit} ref={form}>
-          {!successful && (
+        <Form onSubmit={handleSubmitPatients} ref={form}>
             <div>
-
-
-              <p className="mt-2">Patient data</p>
+              <p className="textOrange mt-2">Patient data</p>
               <Form.Group controlId="formFile" className="mb-3">
                 <Form.Control type="file" onChange={event => onChangePatient(event)}/>
-              </Form.Group>
-
-              <div className="form-check form-check-inline mt-3" onChange={event => {
-                setPressed(pressed => !pressed) && setSymptomsFile(null)
-              }}>
-                <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"/>
-                <h6>Want to add symptoms?</h6>
-              </div>
-              <Form.Group controlId="formFile" className="mb-3" hidden={pressed}>
-                <p>Symptoms</p>
-                <Form.Control type="file" disabled={pressed} onChange={event => onChangeSymptoms(event)}/>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -136,9 +132,9 @@ const AddDatasetsSection = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter a dataset name"
-                  onChange={onChangeDatasetName}
+                  onChange={onChangeDatasetNamePatients}
                   maxLength={50}
-                  value={datasetName}
+                  value={datasetNamePatient}
                   validations={[required, validName]}
                 />
                 <Form.Text className="text-muted">
@@ -146,27 +142,58 @@ const AddDatasetsSection = () => {
                 </Form.Text>
               </Form.Group>
             </div>
+        </Form>
+        <button
+          className="btn btn-outline-success btn-lg"
+          onClick={event => handleSubmitPatients()}
+          disabled={loadingPatients }>
+          {loadingPatients && (
+            <span className="spinner-border spinner-border-sm ">  </span>
           )}
+          <span>Add patients</span>
+        </button>
+        <Form onSubmit={handleSubmitSymptoms} ref={form}>
+            <div>
+              <Form.Group controlId="formFile" className="mb-3">
+                <p className="textOrange mt-3">Symptoms data</p>
+                <Form.Control type="file" onChange={event => onChangeSymptoms(event)}/>
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Datasheets name</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Enter a dataset name"
+                  onChange={onChangeDatasetNameSymptoms}
+                  maxLength={50}
+                  value={datasetNameSymptoms}
+                  validations={[required, validName]}
+                />
+                <Form.Text className="text-muted">
+                  You must enter a name to this new dataset, to save this in the database
+                </Form.Text>
+              </Form.Group>
+            </div>
           {message && (
-            <div className="form-group">
+            <div className="form-group align-content-center">
               <div
                 className={successful ? "alert alert-success" : "alert alert-danger"}
+                style={{width:'450px'}}
                 role="alert">
                 {message}
               </div>
             </div>
           )}
         </Form>
-        {setMessage()}
         {setMessageName()}
         <button
           className="btn btn-outline-success btn-lg"
-          onClick={event => handleSubmit()}
-          disabled={loading}>
-          {loading && (
+          onClick={event => handleSubmitSymptoms()}
+          disabled={loadingSymptoms }>
+          {loadingSymptoms && (
             <span className="spinner-border spinner-border-sm ">  </span>
           )}
-          <span>Add</span>
+          <span>Add symptoms</span>
         </button>
       </section>
     </div>

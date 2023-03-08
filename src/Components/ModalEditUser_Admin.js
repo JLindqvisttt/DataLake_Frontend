@@ -93,6 +93,7 @@ const ModalEditUser_Admin = (user) => {
       );
     }
   };
+
   const handleClose = () => {
     dispatch(clearMessage());
     setSuccessful(true);

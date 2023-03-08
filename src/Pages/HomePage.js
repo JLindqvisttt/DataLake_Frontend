@@ -78,7 +78,7 @@ const HomePage = () => {
     setsuccessfulGetData(false)
     setdataDownload(null)
   }
-  
+
   function setMessageGetData() {
     if (failedGetData)
       return <div className="form-group-sm mt-2">
@@ -109,7 +109,17 @@ const HomePage = () => {
 
   const downloadExcel = () => {
     if (!dataDownload) return;
-    const sheet = utils.json_to_sheet(JSON.parse(dataDownload));
+    const data = JSON.parse(dataDownload);
+    const flattenedData = data.map(item => {
+      const flattenedItem = { ...item };
+      flattenedItem.treatment = item.treatment.treatment; // Flatten the treatment field
+      flattenedItem.symptoms = item.symptoms.map(symptom => `${symptom.symptom} (${symptom.severity})`).join(', '); // Flatten the symptoms field
+      flattenedItem.overAllSurvivalStatus = item.overAllSurvivalStatus.overAllSurvivalStatus; // Flatten the overAllSurvivalStatus field
+      flattenedItem.newMalignancy = item.newMalignancy.newMalignancy; // Flatten the newMalignancy field
+      if (item.causeOfDeath) flattenedItem.causeOfDeath = item.causeOfDeath.causeOfDeath; // Flatten the causeOfDeath field
+      return flattenedItem;
+    });
+    const sheet = utils.json_to_sheet(flattenedData);
     const book = utils.book_new();
     utils.book_append_sheet(book, sheet, 'Sheet1');
     const excelBuffer = writeExcel(book, {type: 'buffer'});
