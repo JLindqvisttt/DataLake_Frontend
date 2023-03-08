@@ -195,6 +195,9 @@ const AddDatasetsSection = () => {
           )}
           <span>Add symptoms</span>
         </button>
+        <div className="alert alert-info mt-3" role="alert">
+          You can upload both as an xlsx and a sas7bdat files
+        </div>
       </section>
     </div>
   );
