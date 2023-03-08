@@ -13,6 +13,10 @@ export const USERSTATE = {
   GET_ALL_USER_FAIL: "GET_ALL_USER_FAIL",
   GET_ALL_DATASET: "GET_ALL_DATASET",
   GET_ALL_DATASET_FAIL: "GET_ALL_DATASET_FAIL",
+  GET_NROFNODES: "GET_NROFNODES",
+  GET_NROFNODES_FAIL: "GET_NROFNODES_FAIL",
+  GET_NROFRELATIONS: "GET_NROFRELATIONS",
+  GET_NROFRELATIONS_FAIL: "GET_NROFRELATIONS_FAIL",
   UPDATE_USER: "UPDATE_USER",
   UPDATE_USER_FAIL: "UPDATE_USER_FAIL",
   ADD_DATASET_PATIENT: "ADD_DATASET_PATIENT",
@@ -25,6 +29,67 @@ export const clearMessage = () => ({
   type: USERSTATE.CLEAR_MESSAGE,
 });
 
+export const getNrOfNodes = () => (dispatch) => {
+  return AdminService.getNrOfNodes().then(
+    (data) => {
+      const jsonResp = JSON.stringify(data.data)
+      dispatch({
+        type: USERSTATE.GET_NROFNODES,
+        payload: {datasets: jsonResp}
+      });
+      return jsonResp;
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: USERSTATE.GET_NROFNODES_FAIL,
+      });
+
+      dispatch({
+        type: STATES.SET_MESSAGE,
+        payload: message,
+      });
+      return Promise.reject();
+    }
+  );
+}
+
+export const getNrOfRelations = () => (dispatch) => {
+  return AdminService.getNrOfRelations().then(
+    (data) => {
+      const jsonResp = JSON.stringify(data.data)
+      dispatch({
+        type: USERSTATE.GET_NROFRELATIONS,
+        payload: {datasets: jsonResp}
+      });
+      return jsonResp;
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: USERSTATE.GET_NROFRELATIONS_FAIL,
+      });
+
+      dispatch({
+        type: STATES.SET_MESSAGE,
+        payload: message,
+      });
+      return Promise.reject();
+    }
+  );
+}
 export const getAllDatasets = () => (dispatch) => {
   return AdminService.getAllDatasets().then(
     (data) => {
@@ -52,7 +117,6 @@ export const getAllDatasets = () => (dispatch) => {
         type: STATES.SET_MESSAGE,
         payload: message,
       });
-
       return Promise.reject();
     }
   );

@@ -8,6 +8,7 @@ import HomePage from "./Pages/HomePage";
 import ProfilePage from "./Pages/ProfilePage";
 import Users_Admin from "./Pages/Users_Admin";
 import Datasets_Admin from "./Pages/Datasets_Admin";
+import Info_Admin from "./Pages/Info_Admin"
 import {useDispatch} from "react-redux";
 import AuthVerify from "./Redux/Actions/AllActions/AuthVerify";
 import {useCallback, useEffect} from "react";
@@ -47,6 +48,7 @@ const App = () => {
         <Route exact path="/ProfilePage" element=<ProfilePage/> />
         <Route exact path="/Users_Admin" element=<Users_Admin/> />
         <Route exact path="/Datasets_Admin" element=<Datasets_Admin/> />
+        <Route exact path="/Info_Admin" element=<Info_Admin/> />
       </Routes>
       <AuthVerify signout={signout}/>
     </div>

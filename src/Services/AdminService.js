@@ -28,7 +28,14 @@ const getAllDatasets = () => {
   const token = JSON.parse(Cookies.get("user")).token;
   return axios.get(API_PATIENT + "getAllDatasets", {headers: {"Authorization": `Bearer ${token}`}})
 }
-
+const getNrOfNodes = () => {
+  const token = JSON.parse(Cookies.get("user")).token;
+  return axios.get(API_URL + "nrOfNodes", {headers: {"Authorization": `Bearer ${token}`}})
+}
+const getNrOfRelations = () => {
+  const token = JSON.parse(Cookies.get("user")).token;
+  return axios.get(API_URL + "nrOfRelations", {headers: {"Authorization": `Bearer ${token}`}})
+}
 const updateUser = (theedituser) => {
   const token = JSON.parse(Cookies.get("user")).token;
   return axios.patch(API_URL + "updateUser", theedituser, {headers: {"Authorization": `Bearer ${token}`}})
@@ -57,5 +64,7 @@ export default {
   getAllDatasets,
   updateUser,
   addDatasets_Symptoms,
-  addDatasets_Patients
+  addDatasets_Patients,
+  getNrOfNodes,
+  getNrOfRelations
 }

@@ -55,6 +55,9 @@ const Sidebar = (props) => {
             <div>
               <div hidden={userRole !== "ROLE_ADMIN"}>
                 <hr/>
+                <NavLink to="/Info_Admin" activeclassname="activeClicked ">
+                  <CDBSidebarMenuItem icon="info text-primary">Dashboard </CDBSidebarMenuItem>
+                </NavLink>
                 <NavLink to="/Users_Admin" activeclassname="activeClicked ">
                   <CDBSidebarMenuItem icon="users-cog text-info">Users </CDBSidebarMenuItem>
                 </NavLink>
