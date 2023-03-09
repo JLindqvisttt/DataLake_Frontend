@@ -2,7 +2,7 @@ import './Styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap';
 
-import {BrowserRouter as Router, Route, Routes, useLocation} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import SignIn from "./Pages/SignInPage";
 import HomePage from "./Pages/HomePage";
 import ProfilePage from "./Pages/ProfilePage";
@@ -52,8 +52,6 @@ const App = () => {
       </Routes>
       <AuthVerify signout={signout}/>
     </div>
-
-
   );
 }
 

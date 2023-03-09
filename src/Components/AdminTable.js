@@ -1,16 +1,13 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Cookies from "js-cookie";
-import {signOut} from "../Redux/Actions/AllActions/AuthAction";
-import axios from "axios";
 import ModalEditUser_Admin from "./ModalEditUser_Admin";
 import {useDispatch} from "react-redux";
 import {getAllUsers} from "../Redux/Actions/AllActions/AdminAction";
-import {IconName} from "react-icons/io5";
 import {MDBIcon} from "mdb-react-ui-kit";
 import ModalRemoveUser_Admin from "./ModalRemoveUser_Admin";
 import ModalAddUser_Admin from "./ModalAddUser_Admin";
 
-const AdminTable = (props) => {
+const AdminTable = () => {
 
   const [updateUsers, setupdateUsers] = useState(false);
   const [userList, setUserList] = useState([]);

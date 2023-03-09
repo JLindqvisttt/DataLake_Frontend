@@ -11,10 +11,9 @@ import "../Styles/Sidebar.css"
 import Cookies from 'js-cookie'
 import {useDispatch} from "react-redux";
 import {signOut} from "../Redux/Actions/AllActions/AuthAction";
-import {MDBIcon} from "mdb-react-ui-kit";
 
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   const [userEmail, setUserEmail] = useState();
   const [userRole, setUserRole] = useState();
 
@@ -73,10 +72,4 @@ const Sidebar = (props) => {
     </div>
   );
 }
-
-function remove() {
-  console.log("apa")
-  Cookies.remove('user')
-}
-
 export default Sidebar;

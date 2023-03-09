@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "../Styles/style.css"
 import Sidebar from "../Components/SidebarMenu";
 import {Navigate} from "react-router-dom";
@@ -41,9 +41,8 @@ const HomePage = () => {
       if (selectedDatabases.value === "261") {
         return (
           <div>
-            <button className="button fw-bold m-4" onClick={event => getPatientByDatasetFunction()}><MDBIcon fas
-                                                                                                             icon="sync"/> Get
-              all patients from this dataset
+            <button className="button fw-bold m-4" onClick={event => getPatientByDatasetFunction()}>
+              <MDBIcon fas icon="sync"/> Get all patients from this dataset
             </button>
           </div>
         )
@@ -57,7 +56,7 @@ const HomePage = () => {
       .then((datasets) => {
         setsuccessfulGetData(true)
         setdataDownload(datasets)
-      }).catch((err) => {
+      }).catch(() => {
       setfailedGetData(true)
     })
   }
@@ -69,7 +68,7 @@ const HomePage = () => {
         setsuccessfulGetData(true)
         setdataDownload(datasets)
         console.log(datasets)
-      }).catch((err) => {
+      }).catch(() => {
       setfailedGetData(true)
     })
   }
@@ -111,7 +110,7 @@ const HomePage = () => {
     if (!dataDownload) return;
     const data = JSON.parse(dataDownload);
     const flattenedData = data.map(item => {
-      const flattenedItem = { ...item };
+      const flattenedItem = {...item};
       flattenedItem.treatment = item.treatment.treatment; // Flatten the treatment field
       flattenedItem.symptoms = item.symptoms.map(symptom => `${symptom.symptom} (${symptom.severity})`).join(', '); // Flatten the symptoms field
       flattenedItem.overAllSurvivalStatus = item.overAllSurvivalStatus.overAllSurvivalStatus; // Flatten the overAllSurvivalStatus field

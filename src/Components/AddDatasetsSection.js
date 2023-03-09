@@ -4,15 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
 import {
   addDatasets_Patients,
-  addDatasets_Symptoms, clearMessage,
-  getAllUsers,
-  updateUser
+  addDatasets_Symptoms, clearMessage
 } from "../Redux/Actions/AllActions/AdminAction";
 import {useDispatch, useSelector} from "react-redux";
-import CheckButton from "react-validation/build/button";
 
 const validName = (value) => {
   if (value.length < 6 || value.length > 40) {
@@ -38,7 +34,6 @@ const AddDatasetsSection = () => {
   const {message} = useSelector(state => state.message);
 
   const form = useRef();
-  const checkBtn = useRef();
 
   useEffect(() => {
     dispatch(clearMessage());
@@ -60,7 +55,7 @@ const AddDatasetsSection = () => {
   }
 
   const handleSubmitPatients = (e) => {
-    if (patientFile && datasetNamePatient!=null) {
+    if (patientFile && datasetNamePatient != null) {
       setLoadingPatients(true);
       dispatch(addDatasets_Patients(patientFile, datasetNamePatient))
         .then(() => {
@@ -79,7 +74,7 @@ const AddDatasetsSection = () => {
     }
   }
   const handleSubmitSymptoms = (e) => {
-    if (symptomsFile && datasetNameSymptoms!=null) {
+    if (symptomsFile && datasetNameSymptoms != null) {
       setloadingSymptoms(true);
       dispatch(addDatasets_Symptoms(symptomsFile, datasetNameSymptoms))
         .then(() => {
@@ -121,64 +116,64 @@ const AddDatasetsSection = () => {
       <section className="bg-transparent text-white">
         <h4 className="textOrange">Add a new datasets</h4>
         <Form onSubmit={handleSubmitPatients} ref={form}>
-            <div>
-              <p className="textOrange mt-2">Patient data</p>
-              <Form.Group controlId="formFile" className="mb-3">
-                <Form.Control type="file" onChange={event => onChangePatient(event)}/>
-              </Form.Group>
+          <div>
+            <p className="textOrange mt-2">Patient data</p>
+            <Form.Group controlId="formFile" className="mb-3">
+              <Form.Control type="file" onChange={event => onChangePatient(event)}/>
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Datasheets name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter a dataset name"
-                  onChange={onChangeDatasetNamePatients}
-                  maxLength={50}
-                  value={datasetNamePatient}
-                  validations={[required, validName]}
-                />
-                <Form.Text className="text-muted">
-                  You must enter a name to this new dataset, to save this in the database
-                </Form.Text>
-              </Form.Group>
-            </div>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Datasheets name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter a dataset name"
+                onChange={onChangeDatasetNamePatients}
+                maxLength={50}
+                value={datasetNamePatient}
+                validations={[required, validName]}
+              />
+              <Form.Text className="text-muted">
+                You must enter a name to this new dataset, to save this in the database
+              </Form.Text>
+            </Form.Group>
+          </div>
         </Form>
         <button
           className="btn btn-outline-success btn-lg"
           onClick={event => handleSubmitPatients()}
-          disabled={loadingPatients }>
+          disabled={loadingPatients}>
           {loadingPatients && (
             <span className="spinner-border spinner-border-sm ">  </span>
           )}
           <span>Add patients</span>
         </button>
         <Form onSubmit={handleSubmitSymptoms} ref={form}>
-            <div>
-              <Form.Group controlId="formFile" className="mb-3">
-                <p className="textOrange mt-3">Symptoms data</p>
-                <Form.Control type="file" onChange={event => onChangeSymptoms(event)}/>
-              </Form.Group>
+          <div>
+            <Form.Group controlId="formFile" className="mb-3">
+              <p className="textOrange mt-3">Symptoms data</p>
+              <Form.Control type="file" onChange={event => onChangeSymptoms(event)}/>
+            </Form.Group>
 
-              <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Datasheets name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter a dataset name"
-                  onChange={onChangeDatasetNameSymptoms}
-                  maxLength={50}
-                  value={datasetNameSymptoms}
-                  validations={[required, validName]}
-                />
-                <Form.Text className="text-muted">
-                  You must enter a name to this new dataset, to save this in the database
-                </Form.Text>
-              </Form.Group>
-            </div>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Datasheets name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter a dataset name"
+                onChange={onChangeDatasetNameSymptoms}
+                maxLength={50}
+                value={datasetNameSymptoms}
+                validations={[required, validName]}
+              />
+              <Form.Text className="text-muted">
+                You must enter a name to this new dataset, to save this in the database
+              </Form.Text>
+            </Form.Group>
+          </div>
           {message && (
             <div className="form-group align-content-center">
               <div
                 className={successful ? "alert alert-success" : "alert alert-danger"}
-                style={{width:'450px'}}
+                style={{width: '450px'}}
                 role="alert">
                 {message}
               </div>
@@ -189,7 +184,7 @@ const AddDatasetsSection = () => {
         <button
           className="btn btn-outline-success btn-lg"
           onClick={event => handleSubmitSymptoms()}
-          disabled={loadingSymptoms }>
+          disabled={loadingSymptoms}>
           {loadingSymptoms && (
             <span className="spinner-border spinner-border-sm ">  </span>
           )}

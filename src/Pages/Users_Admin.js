@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React from "react";
 import "../Styles/style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Sidebar from "../Components/SidebarMenu";
@@ -12,7 +12,6 @@ import Footer from "../Components/Footer";
 
 
 const Users_Admin = () => {
-
 
   if (!Cookies.get('user')) {
     return <Navigate to="/"/>;

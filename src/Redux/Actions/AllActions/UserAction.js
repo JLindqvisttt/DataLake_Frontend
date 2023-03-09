@@ -1,6 +1,5 @@
 import UserService from "../../../Services/UserService";
 import {STATES} from "./AuthAction";
-import AdminService from "../../../Services/AdminService";
 
 export const USERSTATE = {
   EDIT_USER: "EDIT_USER",

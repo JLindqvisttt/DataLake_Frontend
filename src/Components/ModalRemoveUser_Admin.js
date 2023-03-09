@@ -1,10 +1,10 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState} from "react";
 import "../Styles/style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
-import {Button, Modal, NavLink} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {MDBIcon} from "mdb-react-ui-kit";
 import {clearMessage, removeUser} from "../Redux/Actions/AllActions/AdminAction";
@@ -25,7 +25,7 @@ const ModalRemoveUser_Admin = (user) => {
     dispatch(clearMessage());
     setShow(true);
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     const theRemoveUser = {id: user.user.identity}
     dispatch(removeUser(theRemoveUser)).then(() => {
       setSuccessful(true);

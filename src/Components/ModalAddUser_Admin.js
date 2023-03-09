@@ -13,15 +13,7 @@ import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import {addUser, clearMessage} from "../Redux/Actions/AllActions/AdminAction";
 import {isEmail} from "validator";
-const required = (value) => {
-  if (!value) {
-    return (
-      <div className="alert alert-danger" role="alert">
-        This field is required!
-      </div>
-    );
-  }
-};
+
 
 const validEmail = (value) => {
   if (!isEmail(value)) {

@@ -1,6 +1,5 @@
 import AdminService from "../../../Services/AdminService";
 import {STATES} from "./AuthAction";
-import UserService from "../../../Services/UserService";
 
 export const USERSTATE = {
   REMOVE_USER: "REMOVE_USER",
@@ -264,7 +263,6 @@ export const updateUser = (editUser) => (dispatch) => {
   );
 }
 
-/** NEW datasets functions*/
 export const addDatasets_Patients = (patientFile,datasetName) => {
   return (dispatch) => {
     return AdminService.addDatasets_Patients(patientFile,datasetName)

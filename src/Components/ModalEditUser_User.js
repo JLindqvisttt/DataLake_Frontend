@@ -1,14 +1,13 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef} from "react";
 import "../Styles/style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
-import {Button, Modal, NavLink} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {updateUser, updateUserName} from "../Redux/Actions/AllActions/UserAction";
+import {updateUserName} from "../Redux/Actions/AllActions/UserAction";
 import {MDBIcon} from "mdb-react-ui-kit";
-import {MultiSelect} from "react-multi-select-component";
 import Cookies from "js-cookie";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";

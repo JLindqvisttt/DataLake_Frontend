@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React from "react";
 import "../Styles/style.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Sidebar from "../Components/SidebarMenu";
@@ -7,13 +7,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
 import {Navigate} from "react-router-dom";
 import Cookies from "js-cookie";
-import AdminTable from "../Components/AdminTable";
 import Footer from "../Components/Footer";
 import AddDatasetsSection from "../Components/AddDatasetsSection";
 
 
 const Datasets_Admin = () => {
-
 
   if (!Cookies.get('user')) {
     return <Navigate to="/"/>;

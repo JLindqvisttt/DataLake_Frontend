@@ -1,11 +1,8 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import "../Styles/style.css"
 import Sidebar from "../Components/SidebarMenu";
 import Cookies from "js-cookie";
-import {useSelector} from "react-redux";
 import {Navigate} from "react-router-dom";
-import Form from "react-validation/build/form";
-import CheckButton from "react-validation/build/button";
 import ModalEditUser_User from "../Components/ModalEditUser_User";
 import ModalEditPasswordUser_User from "../Components/ModalEditPasswordUser_User";
 import Footer from "../Components/Footer";
@@ -13,20 +10,15 @@ import Footer from "../Components/Footer";
 
 const ProfilePage = () => {
   const [userEmail, setUserEmail] = useState();
-  const [userRole, setUserRole] = useState();
   const [userFirstname, setuserFirstname] = useState();
   const [userLastname, setuserLastname] = useState();
-  const [userPassword, setuserPassword] = useState();
-  const [edit, setEdit] = useState(true);
   const [databases, setDatabases] = useState([]);
-  const form = useRef();
 
   useEffect(() => {
     if (Cookies.get('user')) {
       setUserEmail(JSON.parse(Cookies.get('user')).email)
       setuserFirstname(JSON.parse(Cookies.get('user')).firstname)
       setuserLastname(JSON.parse(Cookies.get('user')).lastname)
-      setUserRole(JSON.parse(Cookies.get('user')).role)
       const datebase = JSON.parse(Cookies.get('user')).availableDatabases
       setDatabases(datebase)
     }

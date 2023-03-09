@@ -4,9 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap";
-import {Button, Modal, NavLink} from "react-bootstrap";
+import {Button, Modal} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
-import {clearMessage, getAllDatasets, getAllUsers, updateUser} from "../Redux/Actions/AllActions/AdminAction";
+import {clearMessage, getAllDatasets, updateUser} from "../Redux/Actions/AllActions/AdminAction";
 import {MDBIcon} from "mdb-react-ui-kit";
 import Select from 'react-select'
 import {MultiSelect} from "react-multi-select-component";

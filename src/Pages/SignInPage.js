@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef} from "react";
 import "../Styles/style.css"
 import {useDispatch, useSelector} from "react-redux";
 import Form from "react-validation/build/form";
