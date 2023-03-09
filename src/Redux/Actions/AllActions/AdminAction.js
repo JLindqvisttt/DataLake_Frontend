@@ -131,7 +131,6 @@ export const getAllUsers = () => (dispatch) => {
         payload: {users: jsonResp}
       });
       return jsonResp;
-      console.log(jsonResp)
     },
     (error) => {
       const message =
@@ -166,7 +165,6 @@ export const addUser = (userEmail, password,firstname,lastname) => (dispatch) =>
         type: USERSTATE.SET_MESSAGE,
         payload: response.data.message,
       });
-      console.log(response.data.message)
       return Promise.resolve();
     },
     (error) => {
@@ -201,7 +199,6 @@ export const removeUser = (removeUser) => (dispatch) => {
         type: USERSTATE.SET_MESSAGE,
         payload: response.data.message,
       });
-      console.log(response.data.message)
       return Promise.resolve();
     },
     (error) => {
@@ -237,11 +234,9 @@ export const updateUser = (editUser) => (dispatch) => {
         type: USERSTATE.SET_MESSAGE,
         payload: response.data.message,
       });
-      console.log(response.data.message)
       return Promise.resolve();
     },
     (error) => {
-      console.log(error)
       const message =
         (error.response &&
           error.response.data &&
@@ -275,10 +270,8 @@ export const addDatasets_Patients = (patientFile,datasetName) => {
           type: USERSTATE.SET_MESSAGE,
           payload: response.data.message,
         });
-        console.log(response.data.message)
         return Promise.resolve();
       }, (error) => {
-        console.log(error)
         const message =
           (error.response &&
             error.response.data &&
@@ -311,11 +304,9 @@ export const addDatasets_Symptoms = (symptomsFile,datasetName) => (dispatch) => 
         type: USERSTATE.SET_MESSAGE,
         payload: response.data.message,
       });
-      console.log(response.data.message)
       return Promise.resolve();
     },
     (error) => {
-      console.log(error)
       const message =
         (error.response &&
           error.response.data &&

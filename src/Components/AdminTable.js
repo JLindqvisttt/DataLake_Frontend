@@ -18,7 +18,6 @@ const AdminTable = () => {
 
     dispatch(getAllUsers())
       .then((users) => {
-        console.log(JSON.parse(users))
         setUserList(JSON.parse(users))
       })
   }, [updateUsers])

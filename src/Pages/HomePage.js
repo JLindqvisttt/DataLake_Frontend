@@ -38,7 +38,7 @@ const HomePage = () => {
 
   function whichDatabasesSelected() {
     if (selectedDatabases) {
-      if (selectedDatabases.value === "261") {
+      if (selectedDatabases.value) {
         return (
           <div>
             <button className="button fw-bold m-4" onClick={event => getPatientByDatasetFunction()}>
@@ -67,7 +67,6 @@ const HomePage = () => {
       .then((datasets) => {
         setsuccessfulGetData(true)
         setdataDownload(datasets)
-        console.log(datasets)
       }).catch(() => {
       setfailedGetData(true)
     })

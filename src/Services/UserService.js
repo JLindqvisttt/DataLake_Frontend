@@ -15,13 +15,11 @@ const updateUserWithNewPassword = (theedituser) => {
 
 const getPatientsByDataset = (name) => {
   const token = JSON.parse(Cookies.get("user")).token;
-  console.log("GET PATIENTS BY DATASET")
   return axios.get(API_PATIENT + `getPatientsByDataset?name=${name}`, {headers: {"Authorization": `Bearer ${token}`}})
 };
 
 const getAllPatients = () => {
   const token = JSON.parse(Cookies.get("user")).token;
-  console.log("GET ALL PATIENTS")
   return axios.get(API_PATIENT + `getAllPatients`, {headers: {"Authorization": `Bearer ${token}`}})
 };
 

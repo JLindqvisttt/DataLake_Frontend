@@ -91,11 +91,9 @@ export const updateUserName = (editUser) => (dispatch) => {
         type: USERSTATE.SET_MESSAGE,
         payload: response.data.message,
       });
-      console.log("Message:" + response.data.message)
       return Promise.resolve();
     },
     (error) => {
-      console.log(error)
       const message =
         (error.response &&
           error.response.data &&
@@ -131,7 +129,6 @@ export const updateUserWithNewPassword = (editUser) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      console.log(error)
       const message =
         (error.response &&
           error.response.data &&

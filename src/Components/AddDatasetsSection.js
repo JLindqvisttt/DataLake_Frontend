@@ -61,6 +61,8 @@ const AddDatasetsSection = () => {
         .then(() => {
           setSuccessful(true);
           setLoadingPatients(false);
+          setPatientFile(null);
+          setdatasetNamePatient("");
         })
         .catch(() => {
           setSuccessful(false);
@@ -80,6 +82,8 @@ const AddDatasetsSection = () => {
         .then(() => {
           setSuccessful(true);
           setloadingSymptoms(false);
+          setSymptomsFile(null);
+          setdatasetNameSymptoms("");
         })
         .catch(() => {
           setSuccessful(false);

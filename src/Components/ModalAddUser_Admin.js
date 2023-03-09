@@ -98,6 +98,10 @@ const ModalAddUser_Admin = () => {
   };
   const handleShow = () => {
     dispatch(clearMessage());
+    setFirstname("");
+    setLastname("")
+    setEmail("")
+    setPassword("")
     setShow(true);
   }
   const handleClose = () => {

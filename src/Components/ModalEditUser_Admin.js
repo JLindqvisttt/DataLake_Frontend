@@ -71,7 +71,6 @@ const ModalEditUser_Admin = (user) => {
           label: item.charAt(0).toUpperCase() + item.slice(1),
           value: item
         }));
-        console.log("Converted items:", JSON.stringify(convertedItems));
         setdatabasesOptions(convertedItems)
       })
 
@@ -113,9 +112,9 @@ const ModalEditUser_Admin = (user) => {
       if (checkBtn.current.context._errors.length === 0) {
         const theEditUser = {
           id: user.user.id,
-          password: password,
           role: role.value,
-          availableDatabases: DatabaseList
+          availableDatabases: DatabaseList,
+          password: password,
         }
 
         dispatch(updateUser(theEditUser))
@@ -129,8 +128,8 @@ const ModalEditUser_Admin = (user) => {
     } else {
 
       const theEditUser = {
-        identity: user.user.id,
-        role: role,
+        id: user.user.id,
+        role: role.value,
         availableDatabases: DatabaseList
       }
       dispatch(updateUser(theEditUser))

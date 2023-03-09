@@ -21,7 +21,7 @@ body{
 }
 
 .bg-image {
-  background: linear-gradient(-45deg, #292c2c, #da166d, #d29811, #022de8);
+  background: linear-gradient(-45deg, #292c2c, #e06f12, #d29811, #871eea);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
