@@ -9,7 +9,7 @@ import {MDBIcon} from "mdb-react-ui-kit";
 import Footer from "../Components/Footer";
 import {useDispatch} from "react-redux";
 import {getAllPatients, getPatientsByDataset} from "../Redux/Actions/AllActions/UserAction";
-import {utils, write as writeExcel} from 'xlsx';
+import ExcelJS from 'exceljs';
 import {saveAs} from 'file-saver';
 
 const HomePage = () => {
@@ -105,23 +105,31 @@ const HomePage = () => {
     element.click();
   };
 
-  const downloadExcel = () => {
+  const downloadExcel = async () => {
     if (!dataDownload) return;
-    const data = JSON.parse(dataDownload);
-    const flattenedData = data.map(item => {
-      const flattenedItem = {...item};
-      flattenedItem.treatment = item.treatment.treatment; // Flatten the treatment field
-      flattenedItem.symptoms = item.symptoms.map(symptom => `${symptom.symptom} (${symptom.severity})`).join(', '); // Flatten the symptoms field
-      flattenedItem.overAllSurvivalStatus = item.overAllSurvivalStatus.overAllSurvivalStatus; // Flatten the overAllSurvivalStatus field
-      flattenedItem.newMalignancy = item.newMalignancy.newMalignancy; // Flatten the newMalignancy field
-      if (item.causeOfDeath) flattenedItem.causeOfDeath = item.causeOfDeath.causeOfDeath; // Flatten the causeOfDeath field
-      return flattenedItem;
-    });
-    const sheet = utils.json_to_sheet(flattenedData);
-    const book = utils.book_new();
-    utils.book_append_sheet(book, sheet, 'Sheet1');
-    const excelBuffer = writeExcel(book, {type: 'buffer'});
-    saveAs(new Blob([excelBuffer]), 'data.xlsx');
+    try {
+      const data = JSON.parse(dataDownload);
+      const flattenedData = data.map(item => {
+        const flattenedItem = {...item};
+        flattenedItem.treatment = item.treatment.treatment; // Flatten the treatment field
+        flattenedItem.symptoms = item.symptoms.map(symptom => `${symptom.symptom} (${symptom.severity})`).join(', '); // Flatten the symptoms field
+        flattenedItem.overAllSurvivalStatus = item.overAllSurvivalStatus.overAllSurvivalStatus; // Flatten the overAllSurvivalStatus field
+        flattenedItem.newMalignancy = item.newMalignancy.newMalignancy; // Flatten the newMalignancy field
+        if (item.causeOfDeath) flattenedItem.causeOfDeath = item.causeOfDeath.causeOfDeath; // Flatten the causeOfDeath field
+        return flattenedItem;
+      });
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('Sheet1');
+      if (flattenedData.length > 0) {
+        const columns = Object.keys(flattenedData[0]);
+        worksheet.columns = columns.map(key => ({header: key, key}));
+        flattenedData.forEach(row => worksheet.addRow(columns.map(key => row[key])));
+      }
+      const excelBuffer = await workbook.xlsx.writeBuffer();
+      saveAs(new Blob([excelBuffer]), 'data.xlsx');
+    } catch {
+      setfailedGetData(true);
+    }
   };
 
   return (
